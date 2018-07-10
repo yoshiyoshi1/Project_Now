@@ -4,6 +4,8 @@
 #include "../Camera/Camera.h"
 #include "STitle.h"
 
+#include "../Car/CarBase.h"
+
 
 STitle::STitle() 
 {
@@ -26,16 +28,19 @@ STitle::STitle()
 	m_Cam = new Camera();
 	m_Cam->SetProj();
 
-	m_meshSample.LoadXFile("../data/Mesh/TestData/Model.x");
+	m_meshSample.LoadXFile("../data/Mesh/Car/Taxi/Taxi.x");
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
 
+	car = new CarBase();
 	
 }
 
 STitle::~STitle()
 {
 	Safe_Delete(m_Cam);
+
+	delete car;
 }
 
 //===================================
@@ -109,9 +114,9 @@ void STitle::Render()
 	//-------------------------------------------
 	{
 		CMatrix m;
-		m.CreateMove(0, -2, 10);
-		m.RotateY_Local(45);
+		m.CreateMove(0, -2, 300);
 
+		car->Draw();
 		m_meshSample.Draw(&m);
 	}
 }
