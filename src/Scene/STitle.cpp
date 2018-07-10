@@ -1,6 +1,7 @@
 #include "../main.h"
 #include "../GameWorld.h"
 
+#include "../Map/map.h"
 #include "../Camera/Camera.h"
 #include "STitle.h"
 
@@ -25,6 +26,8 @@ STitle::STitle()
 
 	m_Cam = new Camera();
 	m_Cam->SetProj();
+	m_map = new map();
+	m_map->LoadMap();
 
 	m_meshSample.LoadXFile("../data/Mesh/TestData/Model.x");
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
@@ -108,6 +111,8 @@ void STitle::Render()
 	// 表示テスト用
 	//-------------------------------------------
 	{
+		m_map->DrawMap();
+
 		CMatrix m;
 		m.CreateMove(0, -2, 10);
 		m.RotateY_Local(45);

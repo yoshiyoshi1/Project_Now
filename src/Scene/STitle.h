@@ -11,6 +11,7 @@
 #include "SceneBase.h"
 
 class Camera;
+class map;
 
 class STitle :public SceneBase 
 {
@@ -29,6 +30,7 @@ public:
 
 private:
 	Camera* m_Cam;
+	map* m_map;
 
 	// 表示テスト用
 	CTexture m_texSample[2];

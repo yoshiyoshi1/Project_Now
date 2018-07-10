@@ -16,6 +16,9 @@
     <Filter Include="src\System">
       <UniqueIdentifier>{c52e9831-2ebc-46d9-90ec-aa85edd2c3c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Map">
+      <UniqueIdentifier>{c26f30c2-fa5b-4ea8-9f93-6db74d8dcaca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\GameWorld.cpp">
@@ -59,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="..\src\System\RouteSearch.cpp">
       <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Map\map.cpp">
+      <Filter>src\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="..\src\System\RouteSearch.h">
       <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Map\map.h">
+      <Filter>src\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
