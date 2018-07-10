@@ -29,10 +29,9 @@ STitle::STitle()
 	m_map = new map();
 	m_map->LoadMap();
 
-	m_meshSample.LoadXFile("../data/Map/Mesh/Load.x");
+	m_meshSample.LoadXFile("../data/Mesh/Human/boy.x");
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
-
 }
 
 STitle::~STitle()
@@ -115,9 +114,9 @@ void STitle::Render()
 
 		CMatrix m;
 		m.CreateMove(0, -2, 10);
-		m.RotateY_Local(45);
-
-		//m_meshSample.Draw(&m);
+		m.RotateY_Local(r);
+		r++;
+		m_meshSample.Draw(&m);
 	}
 }
 

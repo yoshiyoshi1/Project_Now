@@ -35,6 +35,7 @@ private:
 	// 表示テスト用
 	CTexture m_texSample[2];
 	CMesh m_meshSample;
+	int r;
 
 	int m_test[10][10];
 };
