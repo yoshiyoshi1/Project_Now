@@ -29,16 +29,16 @@ STitle::STitle()
 	m_map = new map();
 	m_map->LoadMap();
 
-	m_meshSample.LoadXFile("../data/Mesh/TestData/Model.x");
+	m_meshSample.LoadXFile("../data/Map/Mesh/Load.x");
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
 
-	
 }
 
 STitle::~STitle()
 {
 	Safe_Delete(m_Cam);
+	Safe_Delete(m_map);
 }
 
 //===================================
@@ -117,7 +117,7 @@ void STitle::Render()
 		m.CreateMove(0, -2, 10);
 		m.RotateY_Local(45);
 
-		m_meshSample.Draw(&m);
+		//m_meshSample.Draw(&m);
 	}
 }
 

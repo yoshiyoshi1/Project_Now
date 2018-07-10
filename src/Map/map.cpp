@@ -12,13 +12,13 @@ void map::LoadMap(void) {
 		}
 	}
 
-	m_meshLand.LoadXFile("../data/Map/Land.x");
-	m_meshLoad.LoadXFile("../data/Map/Load.x");
+	m_meshLand.LoadXFile("../data/Mesh/Map/Land.x");
+	m_meshRoad.LoadXFile("../data/Mesh/Map/Road.x");
 
 	for (int i = 0; i < MAPHEIGHT; i++) {
 		for (int j = 0; j < MAPWIDTH; j++) {
 			//s—ñ‘ã“ü
-			m[i][j].CreateMove(j + 0.0f, 0.0f, i + 0.0f);
+			m[i][j].CreateMove(j * 2.0f, -10.0f, i * 2.0f);
 		}
 	}
 	fclose(fp);
@@ -33,7 +33,7 @@ void map::DrawMap(void) {
 				}
 				else if (MapData[i][j] == 1) {
 					// Load•\Ž¦
-					m_meshLoad.Draw(&m[i][j]);
+					m_meshRoad.Draw(&m[i][j]);
 				}
 		}
 	}

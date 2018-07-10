@@ -15,8 +15,8 @@ public:
 	int MapData[80][80];
 	int ret;
 	
-	CMesh m_meshLoad;
 	CMesh m_meshLand;
+	CMesh m_meshRoad;
 	CMatrix m[80][80];
 
 };
