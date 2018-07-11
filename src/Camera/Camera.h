@@ -11,8 +11,19 @@ public :
 
 	void SetProj();
 	
-	void SetView(CMatrix mBase);
+	//=======================================
+	// 注視点にしたいものの行列を引数で
+	//=======================================
+	void SetView(CMatrix& mBase);
+	//=======================================
+	// 注視点にしたいものの行列を引数で
+	//=======================================
 	void SetView();
+
+	void SetDisToBase(float f) 
+	{
+		m_DisToBase = f;
+	}
 
 private:
 	CMatrix m_mProj;
@@ -23,6 +34,7 @@ private:
 	CVector3 m_vLook;
 	CVector3 m_vHead;
 
+	float m_DisToBase = 3;	// Base までの距離
 };
 
 

@@ -309,7 +309,7 @@ public:
 	}
 
 	// D3DXMatrixLookAtLH
-	void SetLookAtLH(D3DXVECTOR3 vPos, D3DXVECTOR3 vLook, D3DXVECTOR3 vHead)
+	void SetLookAtLH(D3DXVECTOR3& vPos, D3DXVECTOR3& vLook, D3DXVECTOR3& vHead)
 	{
 		D3DXMatrixLookAtLH(this,
 			&vPos,			// ÉJÉÅÉâÇÃà íu

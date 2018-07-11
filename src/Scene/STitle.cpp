@@ -9,6 +9,9 @@ STitle::STitle()
 {
 	m_id = TITLE;
 
+	//----------------------------------------
+	// ライトの設定
+	//----------------------------------------
 	cdg.SetDirectionalLight(0,
 		&CVector3(1, -1, 0),				// ライトの方向
 		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f),	// 基本色(ディフーズ RGBA)
@@ -16,20 +19,23 @@ STitle::STitle()
 		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f)	// 反射色(スペキュラ RGBA)
 	);
 
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			m_test[i][j] = 999;
-		}
-	}
-	ArrayZeroClear(&**m_test, sizeof(m_test));
-
+	//----------------------------------------
+	// メンバのインスタンス化や初期化など
+	//----------------------------------------
 	m_Cam = new Camera();
 	m_Cam->SetProj();
 
-	m_meshSample.LoadXFile("../data/Mesh/TestData/Model.x");
+	m_mTest.CreateMove(0, -2, 10);
+
+	//----------------------------------------
+	// データのロード
+	//----------------------------------------
+	//m_meshSample.LoadXFile("../data/Mesh/TestData/Model.x");
+	m_meshSample.LoadXFile("../data/Mesh/TestData/test.x");
+	m_meshSample2.LoadXFile("../data/Mesh/TestData/test2.x");
+
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
-
 	
 }
 
@@ -46,6 +52,13 @@ int STitle::Update()
 	// Esc キーでゲーム終了
 	if (GetAsyncKeyState(VK_ESCAPE)) {
 		APP.m_CloseFlag = true;
+	}
+
+	if (GetAsyncKeyState(VK_LEFT)) {
+		m_mTest.Move_Local(-0.1f, 0.0f, 0.0f);
+	}
+	if (GetAsyncKeyState(VK_RIGHT)) {
+		m_mTest.Move_Local(0.1f, 0.0f, 0.0f);
 	}
 
 	return TITLE;
@@ -66,7 +79,12 @@ void STitle::Draw()
 	//-------------------------------------------
 	// カメラ処理
 	//-------------------------------------------
-	//m_Cam->SetView();
+	{
+		CMatrix m;
+		m.CreateMove(0, -2, 10);
+
+		m_Cam->SetView(m_mTest);
+	}
 
 	//-------------------------------------------
 	// 描画処理
@@ -112,7 +130,12 @@ void STitle::Render()
 		m.CreateMove(0, -2, 10);
 		m.RotateY_Local(45);
 
-		m_meshSample.Draw(&m);
+		m_meshSample.Draw(&m_mTest);
+		
+		
+		m.CreateMove(0, -4, 10);
+		m.Scale_Local(20, 20, 20);
+		m_meshSample2.Draw(&m);
 	}
 }
 
@@ -150,4 +173,5 @@ void STitle::DisplayText()
 		m.CreateMove(100, 100, 0);
 		cdg.DrawFont("タイトル", ARGB_FULL, &m);
 	}
+
 }
