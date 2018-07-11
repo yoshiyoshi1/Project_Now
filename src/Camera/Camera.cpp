@@ -21,7 +21,7 @@ Camera::~Camera()
 
 void Camera::Update() 
 {
-	// ƒJƒƒ‰‚Ì‘€ì‚È‚Ç
+	// Æ’JÆ’ÂÆ’â€°â€šÃŒâ€˜â‚¬ÂÃ¬â€šÃˆâ€šÃ‡
 	
 }
 
@@ -38,7 +38,9 @@ void Camera::SetView(CMatrix& mBase)
 	m_vPos.TransformNormal(&CVector3(0, 0, m_DisToBase), &m_mRot);
 	m_vPos.Add(&m_vLook);
 
+
 	m_mView.SetLookAtLH(m_vPos, m_vLook, m_vHead);
+	//m_mView.SetLookAtLH(v[1], v[0], m_vHead);
 
 	cdg.GetDev()->SetTransform(D3DTS_VIEW, &m_mView);
 }
