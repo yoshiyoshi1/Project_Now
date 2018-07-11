@@ -14,11 +14,16 @@ void map::LoadMap(void) {
 
 	m_meshLand.LoadXFile("../data/Mesh/Map/Land.x");
 	m_meshRoad.LoadXFile("../data/Mesh/Map/Road.x");
+	m_meshHouse[0].LoadXFile("../data/Mesh/Map/House1.x");
+	m_meshHouse[1].LoadXFile("../data/Mesh/Map/House2.x");
+	m_meshHouse[2].LoadXFile("../data/Mesh/Map/House3.x");
 
 	for (int i = 0; i < MAPHEIGHT; i++) {
 		for (int j = 0; j < MAPWIDTH; j++) {
 			//s—ñ‘ã“ü
-			m[i][j].CreateMove(j * 2.0f, -10.0f, i * 2.0f);
+			m[i][j].CreateMove(j * 2.0f, -5.0f, i * 2.0f);
+			int r1 = rand() % 10;
+			house[i][j] = r1;
 		}
 	}
 	fclose(fp);
@@ -30,6 +35,13 @@ void map::DrawMap(void) {
 				if (MapData[i][j] == 0) {
 					// Land•\Ž¦
 					m_meshLand.Draw(&m[i][j]);
+					if (house[i][j] == 1) {
+						m_meshHouse[0].Draw(&m[i][j]);
+					} else if (house[i][j] == 2) {
+						m_meshHouse[1].Draw(&m[i][j]);
+					} else if (house[i][j] == 3) {
+						m_meshHouse[2].Draw(&m[i][j]);
+					}
 				}
 				else if (MapData[i][j] == 1) {
 					// Load•\Ž¦
