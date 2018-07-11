@@ -29,14 +29,12 @@ STitle::STitle()
 	m_map->LoadMap();
 
 
-	m_mTest.CreateMove(0, -2, 10);
+	m_mTest.CreateMove(0, 0, 10);
 
 	//----------------------------------------
 	// データのロード
 	//----------------------------------------
-	//m_meshSample.LoadXFile("../data/Mesh/TestData/Model.x");
 	//m_meshSample.LoadXFile("../data/Mesh/TestData/test.x");
-	m_meshSample2.LoadXFile("../data/Mesh/TestData/test2.x");
 
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
@@ -61,11 +59,18 @@ int STitle::Update()
 		APP.m_CloseFlag = true;
 	}
 
+	// カメラの注視対象の移動（仮の処理）
 	if (GetAsyncKeyState(VK_LEFT)) {
 		m_mTest.Move_Local(-0.1f, 0.0f, 0.0f);
 	}
 	if (GetAsyncKeyState(VK_RIGHT)) {
 		m_mTest.Move_Local(0.1f, 0.0f, 0.0f);
+	}
+	if (GetAsyncKeyState(VK_UP)) {
+		m_mTest.Move_Local(0.0f, 0.0f, 0.1f);
+	}
+	if (GetAsyncKeyState(VK_DOWN)) {
+		m_mTest.Move_Local(0.0f, 0.0f, -0.1f);
 	}
 
 	return TITLE;
@@ -142,10 +147,6 @@ void STitle::Render()
 		r++;
 		m_meshSample.Draw(&m);
     
-    m.CreateMove(0, -4, 10);
-		m.Scale_Local(20, 20, 20);
-		m_meshSample2.Draw(&m);
-
 	}
 }
 
@@ -181,7 +182,7 @@ void STitle::DisplayText()
 	{
 		CMatrix m;
 		m.CreateMove(100, 100, 0);
-		cdg.DrawFont("タイトル", ARGB_FULL, &m);
+		cdg.DrawFont("Title", ARGB_FULL, &m);
 	}
 
 }

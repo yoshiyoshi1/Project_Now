@@ -34,6 +34,8 @@ private:
 	CVector3 m_vLook;
 	CVector3 m_vHead;
 
+	CVector3 m_vOffset;	// ’‹‘ÎÛ‚©‚ç‚Ç‚ê‚®‚ç‚¢‚¸‚ç‚·‚©
+
 	float m_DisToBase = 3;	// Base ‚Ü‚Å‚Ì‹——£
 };
 
