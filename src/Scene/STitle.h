@@ -1,6 +1,6 @@
 //**********************************************
 //
-//		ƒ^ƒCƒgƒ‹‰æ–Ê‚ðŠÇ—‚·‚éƒNƒ‰ƒX
+//		ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 //
 //**********************************************
 
@@ -11,6 +11,7 @@
 #include "SceneBase.h"
 
 class Camera;
+class map;
 
 class STitle :public SceneBase 
 {
@@ -20,20 +21,23 @@ public:
 	int Update()override;
 	void Draw()override;
 	
-	// 3D•`‰æ
+	// 3Dæç”»
 	void Render()override;
-	// ƒXƒvƒ‰ƒCƒg•`‰æ
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 	void DrawSprite()override;
-	// ƒeƒLƒXƒg•\Ž¦
+	// ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤º
 	void DisplayText()override;
 
 private:
 	Camera* m_Cam;
+	map* m_map;
 
-	// •\Ž¦ƒeƒXƒg—p
+	// è¡¨ç¤ºãƒ†ã‚¹ãƒˆç”¨
 	CTexture m_texSample[2];
 	CMesh m_meshSample;
+
 	CMesh m_meshSample2;
+	int r;
 
 	CMatrix m_mTest;
 };
