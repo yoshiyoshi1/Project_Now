@@ -116,6 +116,7 @@ void STitle::Render()
 		m.CreateMove(0, -2, 10);
 		m.RotateY_Local(r);
 		r++;
+		if (r > 360) { r = 0; }
 		m_meshSample.Draw(&m);
 	}
 }
