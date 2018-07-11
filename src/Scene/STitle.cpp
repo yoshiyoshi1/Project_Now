@@ -5,6 +5,9 @@
 #include "../Camera/Camera.h"
 #include "STitle.h"
 
+#include "../Car/CarBase.h"
+#include "../Car/Taxi.h"
+
 
 STitle::STitle() 
 {
@@ -40,13 +43,16 @@ STitle::STitle()
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
 
 	m_meshSample.LoadXFile("../data/Mesh/Human/boy.x");
+	m_meshSample.LoadXFile("../data/Mesh/Car/Taxi/Taxi.x");
 
+	car = new Taxi();
 }
 
 STitle::~STitle()
 {
 	Safe_Delete(m_Cam);
 	Safe_Delete(m_map);
+	delete car;
 }
 
 //===================================
@@ -58,6 +64,7 @@ int STitle::Update()
 	if (GetAsyncKeyState(VK_ESCAPE)) {
 		APP.m_CloseFlag = true;
 	}
+
 
 	// カメラの注視対象の移動（仮の処理）
 	if (GetAsyncKeyState(VK_LEFT)) {
@@ -72,6 +79,10 @@ int STitle::Update()
 	if (GetAsyncKeyState(VK_DOWN)) {
 		m_mTest.Move_Local(0.0f, 0.0f, -0.1f);
 	}
+  
+  
+	car->Update();
+
 
 	return TITLE;
 }
@@ -141,11 +152,14 @@ void STitle::Render()
 		m_map->DrawMap();
 
 		CMatrix m;
+    
 		m.CreateMove(0, -2, 10);
 
 		m.RotateY_Local(r);
 		r++;
 		m_meshSample.Draw(&m);
+
+		car->Draw();
     
 	}
 }
