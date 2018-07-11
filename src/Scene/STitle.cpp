@@ -10,28 +10,37 @@ STitle::STitle()
 {
 	m_id = TITLE;
 
+	//----------------------------------------
+	// ライトの設定
+	//----------------------------------------
 	cdg.SetDirectionalLight(0,
-		&CVector3(1, -1, 0),				// ���C�g�̕���
-		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f),	// ��{�F(�f�B�t�[�Y RGBA)
-		&D3DXCOLOR(0.3f, 0.3f, 0.3f, 0.0f),	// ���F(�A���r�G���g RGBA)
-		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f)	// ���ːF(�X�y�L���� RGBA)
+		&CVector3(1, -1, 0),				// ライトの方向
+		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f),	// 基本色(ディフーズ RGBA)
+		&D3DXCOLOR(0.3f, 0.3f, 0.3f, 0.0f),	// 環境色(アンビエント RGBA)
+		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f)	// 反射色(スペキュラ RGBA)
 	);
 
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			m_test[i][j] = 999;
-		}
-	}
-	ArrayZeroClear(&**m_test, sizeof(m_test));
-
+	//----------------------------------------
+	// メンバのインスタンス化や初期化など
+	//----------------------------------------
 	m_Cam = new Camera();
 	m_Cam->SetProj();
 	m_map = new map();
 	m_map->LoadMap();
 
-	m_meshSample.LoadXFile("../data/Mesh/Human/boy.x");
+
+	m_mTest.CreateMove(0, 0, 10);
+
+	//----------------------------------------
+	// データのロード
+	//----------------------------------------
+	//m_meshSample.LoadXFile("../data/Mesh/TestData/test.x");
+
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
+
+	m_meshSample.LoadXFile("../data/Mesh/Human/boy.x");
+
 }
 
 STitle::~STitle()
@@ -41,37 +50,56 @@ STitle::~STitle()
 }
 
 //===================================
-// �^�C�g����ʂ̍X�V
+// タイトル画面の更新
 //===================================
 int STitle::Update()
 {
-	// Esc �L�[�ŃQ�[���I��
+	// Esc キーでゲーム終了
 	if (GetAsyncKeyState(VK_ESCAPE)) {
 		APP.m_CloseFlag = true;
+	}
+
+	// カメラの注視対象の移動（仮の処理）
+	if (GetAsyncKeyState(VK_LEFT)) {
+		m_mTest.Move_Local(-0.1f, 0.0f, 0.0f);
+	}
+	if (GetAsyncKeyState(VK_RIGHT)) {
+		m_mTest.Move_Local(0.1f, 0.0f, 0.0f);
+	}
+	if (GetAsyncKeyState(VK_UP)) {
+		m_mTest.Move_Local(0.0f, 0.0f, 0.1f);
+	}
+	if (GetAsyncKeyState(VK_DOWN)) {
+		m_mTest.Move_Local(0.0f, 0.0f, -0.1f);
 	}
 
 	return TITLE;
 }
 
 //===================================
-// �^�C�g����ʂ̕`��
+// タイトル画面の描画
 //===================================
 void STitle::Draw()
 {
-	// �`��J�n
+	// 描画開始
 	cdg.GetDev()->BeginScene();
 
-	// �o�b�N�o�b�t�@�� Z �o�b�t�@���N���A
+	// バックバッファと Z バッファをクリア
 	cdg.Clear(true, true, false, XRGB(0, 0, 100), 1.0f, 0);
 
 
 	//-------------------------------------------
-	// �J��������
+	// カメラ処理
 	//-------------------------------------------
-	//m_Cam->SetView();
+	{
+		CMatrix m;
+		m.CreateMove(0, -2, 10);
+
+		m_Cam->SetView(m_mTest);
+	}
 
 	//-------------------------------------------
-	// �`�揈��
+	// 描画処理
 	//-------------------------------------------
 	Render();
 
@@ -79,56 +107,58 @@ void STitle::Draw()
 	cdg.BeginSprite();
 	{
 		//-------------------------------------------
-		// �X�v���C�g	2D�摜
+		// スプライト	2D画像
 		//-------------------------------------------
 		DrawSprite();
 
 		//--------------------------------------------
-		// �����\��
+		// 文字表示
 		//--------------------------------------------
 		DisplayText();
 
 	}
 	cdg.EndSprite();
 
-	// �`��I��
+	// 描画終了
 	cdg.GetDev()->EndScene();
 
-	// �o�b�N�o�b�t�@���v���C�}���o�b�t�@�ɃR�s�[
+	// バックバッファをプライマリバッファにコピー
 	cdg.GetDev()->Present(nullptr, nullptr, nullptr, nullptr);
 
 }
 
 
 //================================================================
-// �`�揈��
+// 描画処理
 //================================================================
 void STitle::Render()
 {
 
 	//-------------------------------------------
-	// �\���e�X�g�p
+	// 表示テスト用
 	//-------------------------------------------
 	{
 		m_map->DrawMap();
 
 		CMatrix m;
 		m.CreateMove(0, -2, 10);
+
 		m.RotateY_Local(r);
 		r++;
 		if (r > 360) { r = 0; }
 		m_meshSample.Draw(&m);
+    
 	}
 }
 
 //================================================================
-// �X�v���C�g�`��
+// スプライト描画
 //================================================================
 void STitle::DrawSprite()
 {
 
 	//-------------------------------------------
-	// �\���e�X�g�p
+	// 表示テスト用
 	//-------------------------------------------
 	{
 		CMatrix m;
@@ -142,17 +172,18 @@ void STitle::DrawSprite()
 }
 
 //================================================================
-// �e�L�X�g�\��
+// テキスト表示
 //================================================================
 void STitle::DisplayText()
 {
 
 	//-------------------------------------------
-	// �\���e�X�g�p
+	// 表示テスト用
 	//-------------------------------------------
 	{
 		CMatrix m;
 		m.CreateMove(100, 100, 0);
-		cdg.DrawFont("�^�C�g��", ARGB_FULL, &m);
+		cdg.DrawFont("Title", ARGB_FULL, &m);
 	}
+
 }
