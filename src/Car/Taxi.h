@@ -12,9 +12,7 @@ public:
 
 
 private:
-	CMatrix Tiremat,mat;
-	CMatrix tmp;
-	CMesh body, FTire, RTire;
+	
 
 };
 
