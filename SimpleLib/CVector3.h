@@ -133,7 +133,7 @@ public:
 	void TransformCoord(D3DXVECTOR3 *vSrc,const D3DXMATRIX *D3DXMATRIX){
 		TransformCoord(this,vSrc,D3DXMATRIX);
 	}
-	
+
 	// çsóÒÇ≈ïœä∑(âÒì]ÇÃÇ›ÇÃïœä∑)
 	static void TransformNormal(D3DXVECTOR3 *vOut,const D3DXVECTOR3 *vSrc,const D3DXMATRIX *D3DXMATRIX){// ê√ìIä÷êî
 		D3DXVec3TransformNormal(vOut,vSrc,D3DXMATRIX);
