@@ -9,12 +9,8 @@ public:
 	CarBase();
 	~CarBase();
 
-	void Update();
-	void Draw();
-
-private:
-	CMatrix mat;
-	CMesh mesh;
+	virtual void Update();
+	virtual void Draw();
 
 };
 

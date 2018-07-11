@@ -5,6 +5,7 @@
 #include "STitle.h"
 
 #include "../Car/CarBase.h"
+#include "../Car/Taxi.h"
 
 
 STitle::STitle() 
@@ -32,7 +33,7 @@ STitle::STitle()
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
 
-	car = new CarBase();
+	car = new Taxi();
 	
 }
 
@@ -52,6 +53,8 @@ int STitle::Update()
 	if (GetAsyncKeyState(VK_ESCAPE)) {
 		APP.m_CloseFlag = true;
 	}
+
+	car->Update();
 
 	return TITLE;
 }
@@ -117,7 +120,7 @@ void STitle::Render()
 		m.CreateMove(0, -2, 300);
 
 		car->Draw();
-		m_meshSample.Draw(&m);
+		//m_meshSample.Draw(&m);
 	}
 }
 

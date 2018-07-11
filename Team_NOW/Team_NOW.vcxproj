@@ -128,6 +128,7 @@
     <ClCompile Include="..\SimpleLib\Helper.cpp" />
     <ClCompile Include="..\src\Camera\Camera.cpp" />
     <ClCompile Include="..\src\Car\CarBase.cpp" />
+    <ClCompile Include="..\src\Car\Taxi.cpp" />
     <ClCompile Include="..\src\GameWorld.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Scene\SGame.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="..\SimpleLib\SimpleLib.h" />
     <ClInclude Include="..\src\Camera\Camera.h" />
     <ClInclude Include="..\src\Car\CarBase.h" />
+    <ClInclude Include="..\src\Car\Taxi.h" />
     <ClInclude Include="..\src\GameWorld.h" />
     <ClInclude Include="..\src\main.h" />
     <ClInclude Include="..\src\Scene\SceneBase.h" />

@@ -11,7 +11,7 @@
 #include "SceneBase.h"
 
 class Camera;
-class CarBase;
+class Taxi;
 
 class STitle :public SceneBase 
 {
@@ -37,7 +37,7 @@ private:
 
 	int m_test[10][10];
 	
-	CarBase* car;
+	Taxi* car;
 };
 
 #endif
