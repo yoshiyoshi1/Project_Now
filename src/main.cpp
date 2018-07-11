@@ -168,13 +168,16 @@ int CApp::Loop()
 			//------------------------------------------
 			// ˆ—E•`‰æ
 			//------------------------------------------
+			/*
 			// FPS§Œä (60FPS)
 			DWORD NowTime = timeGetTime();
 			if ((NowTime - m_PrevTime) >= 1000 / 60) {
 				m_PrevTime = NowTime;
-				GW->Update();
-				GW->Draw();
 			}
+			*/
+
+			GW->Update();
+			GW->Draw();
 
 			//------------------------------------------
 			// •`‰æ
