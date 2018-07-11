@@ -180,9 +180,9 @@ public:
 		D3DXMatrixInverse(mOut,pDeterminant,mIn);
 	}
 	// ˆÚ“®s—ñì¬
-	void CreateMove(float x, float y, float z)
+	void CreateMove(float x,float y,float z)
 	{
-		D3DXMatrixTranslation(this, x, y, z);
+		D3DXMatrixTranslation(this,x,y,z);
 	}
 	void CreateMove(const D3DXVECTOR3 *v)
 	{

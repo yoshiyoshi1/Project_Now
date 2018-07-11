@@ -7,11 +7,9 @@ Camera::Camera()
 	m_vPos.Set(0.0f, 0.0f, 0.0f);
 	m_vLook.Set(0.0f, 0.0f, 0.0f);
 	m_vHead.Set(0.0f, 1.0f, 0.0f);
-	
-	m_vOffset.Set(0.0f, 1.0f, 0.0f);
 
-	m_mRot.CreateRotateY(180);
-	m_mRot.RotateX_Local(-45);
+	m_mRot.CreateRotateX(0);
+	m_mRot.RotateY_Local(0);
 }
 
 Camera::~Camera()
@@ -34,11 +32,19 @@ void Camera::SetProj()
 
 void Camera::SetView(CMatrix& mBase)
 {
-	m_vLook.TransformCoord(&m_vOffset, &mBase);
+	CVector3 v;
+
+	m_vLook.TransformCoord(&CVector3(0, 3, 0), &mBase);
+	//v[0].TransformCoord(&CVector3(0, 3, 0),&mBase);
 	m_vPos.TransformNormal(&CVector3(0, 0, m_DisToBase), &m_mRot);
-	m_vPos.Add(&m_vLook);
+	//v.TransformNormal(&CVector3(0, 0, m_DisToBase), &m_mRot);
+	//D3DXVec3TransformNormal(&v, &CVector3())
+	//m_vPos = m_vPos + m_vLook;
+	//m_vPos = v + m_vLook;
+
 
 	m_mView.SetLookAtLH(m_vPos, m_vLook, m_vHead);
+	//m_mView.SetLookAtLH(v[1], v[0], m_vHead);
 
 	cdg.GetDev()->SetTransform(D3DTS_VIEW, &m_mView);
 }
