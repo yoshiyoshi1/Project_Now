@@ -35,11 +35,10 @@ private:
 	// 表示テスト用
 	CTexture m_texSample[2];
 	CMesh m_meshSample;
+	CMatrix m_mTest;	// 注視対象の行列
 
-	CMesh m_meshSample2;
-	int r;
+	float r;
 
-	CMatrix m_mTest;
 };
 
 #endif
