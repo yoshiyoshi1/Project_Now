@@ -23,19 +23,22 @@ namespace SimpleLib{
 #define SAFE_RELEASE(p)		{if(p){p->Release();p=nullptr;}}		// COMオブジェクト系を安全にReleaseするマクロ
 #define SAFE_DELETE(p)		{if(p){delete p;p=nullptr;}}			// newされた変数を安全に解放するマクロ
 #define SAFE_DELETE_ARRAY(p){if(p){delete[] p;p=nullptr;}}			// newされた配列を安全に解放するマクロ
+
+// COMオブジェクト系を安全にReleaseする
 template<class T>
 void Safe_Release(T p)
 {
 	p->Release();
 	p = nullptr;
 }
+// newされた変数を安全に解放する
 template<class T>
 void Safe_Delete(T p)
 {
 	delete p;
 	p = nullptr;
 }
-
+// newされた配列を安全に解放する
 template<class T>
 void Safe_Delete_Array(T p) 
 {
