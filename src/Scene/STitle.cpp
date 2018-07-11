@@ -1,6 +1,7 @@
 #include "../main.h"
 #include "../GameWorld.h"
 
+#include "../Map/map.h"
 #include "../Camera/Camera.h"
 #include "STitle.h"
 
@@ -12,72 +13,104 @@ STitle::STitle()
 {
 	m_id = TITLE;
 
+	//----------------------------------------
+	// ãƒ©ã‚¤ãƒˆã®è¨­å®š
+	//----------------------------------------
 	cdg.SetDirectionalLight(0,
-		&CVector3(1, -1, 0),				// ƒ‰ƒCƒg‚Ì•ûŒü
-		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f),	// Šî–{F(ƒfƒBƒt[ƒY RGBA)
-		&D3DXCOLOR(0.3f, 0.3f, 0.3f, 0.0f),	// ŠÂ‹«F(ƒAƒ“ƒrƒGƒ“ƒg RGBA)
-		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f)	// ”½ËF(ƒXƒyƒLƒ…ƒ‰ RGBA)
+		&CVector3(1, -1, 0),				// ãƒ©ã‚¤ãƒˆã®æ–¹å‘
+		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f),	// åŸºæœ¬è‰²(ãƒ‡ã‚£ãƒ•ãƒ¼ã‚º RGBA)
+		&D3DXCOLOR(0.3f, 0.3f, 0.3f, 0.0f),	// ç’°å¢ƒè‰²(ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆ RGBA)
+		&D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f)	// åå°„è‰²(ã‚¹ãƒšã‚­ãƒ¥ãƒ© RGBA)
 	);
 
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			m_test[i][j] = 999;
-		}
-	}
-	ArrayZeroClear(&**m_test, sizeof(m_test));
-
+	//----------------------------------------
+	// ãƒ¡ãƒ³ãƒã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã‚„åˆæœŸåŒ–ãªã©
+	//----------------------------------------
 	m_Cam = new Camera();
 	m_Cam->SetProj();
+	m_map = new map();
+	m_map->LoadMap();
 
-	m_meshSample.LoadXFile("../data/Mesh/Car/Taxi/Taxi.x");
+
+	m_mTest.CreateMove(0, 0, 10);
+
+	//----------------------------------------
+	// ãƒ‡ãƒ¼ã‚¿ã®ãƒ­ãƒ¼ãƒ‰
+	//----------------------------------------
+	//m_meshSample.LoadXFile("../data/Mesh/TestData/test.x");
+
 	m_texSample[0].LoadTexture("../data/Sprite/TestData/back.png");
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
 
+	m_meshSample.LoadXFile("../data/Mesh/Human/boy.x");
+	m_meshSample.LoadXFile("../data/Mesh/Car/Taxi/Taxi.x");
+
 	car = new Taxi();
-	
 }
 
 STitle::~STitle()
 {
 	Safe_Delete(m_Cam);
-
+	Safe_Delete(m_map);
 	delete car;
 }
 
 //===================================
-// ƒ^ƒCƒgƒ‹‰æ–Ê‚ÌXV
+// ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã®æ›´æ–°
 //===================================
 int STitle::Update()
 {
-	// Esc ƒL[‚ÅƒQ[ƒ€I—¹
+	// Esc ã‚­ãƒ¼ã§ã‚²ãƒ¼ãƒ çµ‚äº†
 	if (GetAsyncKeyState(VK_ESCAPE)) {
 		APP.m_CloseFlag = true;
 	}
 
+
+	// ã‚«ãƒ¡ãƒ©ã®æ³¨è¦–å¯¾è±¡ã®ç§»å‹•ï¼ˆä»®ã®å‡¦ç†ï¼‰
+	if (GetAsyncKeyState(VK_LEFT)) {
+		m_mTest.Move_Local(-0.1f, 0.0f, 0.0f);
+	}
+	if (GetAsyncKeyState(VK_RIGHT)) {
+		m_mTest.Move_Local(0.1f, 0.0f, 0.0f);
+	}
+	if (GetAsyncKeyState(VK_UP)) {
+		m_mTest.Move_Local(0.0f, 0.0f, 0.1f);
+	}
+	if (GetAsyncKeyState(VK_DOWN)) {
+		m_mTest.Move_Local(0.0f, 0.0f, -0.1f);
+	}
+  
+  
 	car->Update();
+
 
 	return TITLE;
 }
 
 //===================================
-// ƒ^ƒCƒgƒ‹‰æ–Ê‚Ì•`‰æ
+// ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã®æç”»
 //===================================
 void STitle::Draw()
 {
-	// •`‰æŠJn
+	// æç”»é–‹å§‹
 	cdg.GetDev()->BeginScene();
 
-	// ƒoƒbƒNƒoƒbƒtƒ@‚Æ Z ƒoƒbƒtƒ@‚ğƒNƒŠƒA
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã¨ Z ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢
 	cdg.Clear(true, true, false, XRGB(0, 0, 100), 1.0f, 0);
 
 
 	//-------------------------------------------
-	// ƒJƒƒ‰ˆ—
+	// ã‚«ãƒ¡ãƒ©å‡¦ç†
 	//-------------------------------------------
-	//m_Cam->SetView();
+	{
+		CMatrix m;
+		m.CreateMove(0, -2, 10);
+
+		m_Cam->SetView(m_mTest);
+	}
 
 	//-------------------------------------------
-	// •`‰æˆ—
+	// æç”»å‡¦ç†
 	//-------------------------------------------
 	Render();
 
@@ -85,53 +118,60 @@ void STitle::Draw()
 	cdg.BeginSprite();
 	{
 		//-------------------------------------------
-		// ƒXƒvƒ‰ƒCƒg	2D‰æ‘œ
+		// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ	2Dç”»åƒ
 		//-------------------------------------------
 		DrawSprite();
 
 		//--------------------------------------------
-		// •¶š•\¦
+		// æ–‡å­—è¡¨ç¤º
 		//--------------------------------------------
 		DisplayText();
 
 	}
 	cdg.EndSprite();
 
-	// •`‰æI—¹
+	// æç”»çµ‚äº†
 	cdg.GetDev()->EndScene();
 
-	// ƒoƒbƒNƒoƒbƒtƒ@‚ğƒvƒ‰ƒCƒ}ƒŠƒoƒbƒtƒ@‚ÉƒRƒs[
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ—ãƒ©ã‚¤ãƒãƒªãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼
 	cdg.GetDev()->Present(nullptr, nullptr, nullptr, nullptr);
 
 }
 
 
 //================================================================
-// •`‰æˆ—
+// æç”»å‡¦ç†
 //================================================================
 void STitle::Render()
 {
 
 	//-------------------------------------------
-	// •\¦ƒeƒXƒg—p
+	// è¡¨ç¤ºãƒ†ã‚¹ãƒˆç”¨
 	//-------------------------------------------
 	{
+		m_map->DrawMap();
+
 		CMatrix m;
-		m.CreateMove(0, -2, 300);
+    
+		m.CreateMove(0, -2, 10);
+
+		m.RotateY_Local(r);
+		r++;
+		m_meshSample.Draw(&m);
 
 		car->Draw();
-		//m_meshSample.Draw(&m);
+    
 	}
 }
 
 //================================================================
-// ƒXƒvƒ‰ƒCƒg•`‰æ
+// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 //================================================================
 void STitle::DrawSprite()
 {
 
 	//-------------------------------------------
-	// •\¦ƒeƒXƒg—p
+	// è¡¨ç¤ºãƒ†ã‚¹ãƒˆç”¨
 	//-------------------------------------------
 	{
 		CMatrix m;
@@ -145,17 +185,18 @@ void STitle::DrawSprite()
 }
 
 //================================================================
-// ƒeƒLƒXƒg•\¦
+// ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤º
 //================================================================
 void STitle::DisplayText()
 {
 
 	//-------------------------------------------
-	// •\¦ƒeƒXƒg—p
+	// è¡¨ç¤ºãƒ†ã‚¹ãƒˆç”¨
 	//-------------------------------------------
 	{
 		CMatrix m;
 		m.CreateMove(100, 100, 0);
-		cdg.DrawFont("ƒ^ƒCƒgƒ‹", ARGB_FULL, &m);
+		cdg.DrawFont("Title", ARGB_FULL, &m);
 	}
+
 }

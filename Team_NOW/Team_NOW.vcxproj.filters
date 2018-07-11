@@ -13,6 +13,8 @@
     <Filter Include="src\System">
       <UniqueIdentifier>{c52e9831-2ebc-46d9-90ec-aa85edd2c3c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Map">
+      <UniqueIdentifier>{c26f30c2-fa5b-4ea8-9f93-6db74d8dcaca}</UniqueIdentifier>
     <Filter Include="src\Car">
       <UniqueIdentifier>{5557ebc2-e3b3-4e1f-ac3d-5182f65bcf5f}</UniqueIdentifier>
     </Filter>
@@ -60,6 +62,8 @@
     <ClCompile Include="..\src\System\RouteSearch.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Map\map.cpp">
+      <Filter>src\Map</Filter>
     <ClCompile Include="..\src\Car\CarBase.cpp">
       <Filter>src\Car</Filter>
     </ClCompile>
@@ -116,6 +120,8 @@
     <ClInclude Include="..\src\System\RouteSearch.h">
       <Filter>src\System</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Map\map.h">
+      <Filter>src\Map</Filter>
     <ClInclude Include="..\src\Car\CarBase.h">
       <Filter>src\Car</Filter>
     </ClInclude>

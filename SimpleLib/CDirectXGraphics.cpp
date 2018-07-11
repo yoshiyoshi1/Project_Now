@@ -55,6 +55,9 @@ bool CDirectXGraphics::Init(HWND hWnd, int Width, int Height, D3DFORMAT Format, 
 	m_d3dpp.EnableAutoDepthStencil = TRUE;
 	m_d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;	// 24bitZバッファ + 8bitステンシルバッファ
 
+	//ﾊﾞｯｸﾊﾞｯﾌｧをﾛｯｸ可能にする(GetDCも可能になる)
+	m_d3dpp.Flags = D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
+
 	//デバイスの作成 - T&L HAL
 	// ※D3DCREATE_MULTITHREADED	…　マルチスレッドでのデバイス操作を許可
 	// ※D3DCREATE_FPU_PRESERVE		…　floatの制度を下げずに維持する(高精度なfloatを使う)
