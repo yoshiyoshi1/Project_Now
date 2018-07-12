@@ -43,7 +43,6 @@ STitle::STitle()
 	m_texSample[1].LoadTexture("../data/Sprite/TestData/continue.png");
 
 	m_meshSample.LoadXFile("../data/Mesh/Human/boy.x");
-	m_meshSample.LoadXFile("../data/Mesh/Car/Taxi/Taxi.x");
 
 	car = new Taxi();
 }
@@ -106,7 +105,8 @@ void STitle::Draw()
 		CMatrix m;
 		m.CreateMove(0, -2, 10);
 
-		m_Cam->SetView(m_mTest);
+		//m_Cam->SetView(m_mTest);
+		m_Cam->SetView(car->GetMat());
 	}
 
 	//-------------------------------------------

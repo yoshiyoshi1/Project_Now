@@ -11,7 +11,11 @@ public:
 	void Draw()override;
 
 
+	CMatrix& GetMat() { return bodyMat; }
+
 private:
+
+	const float MAX_SPEED = 50;
 	
 
 };
