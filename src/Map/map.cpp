@@ -2,13 +2,20 @@
 #include "map.h"
 
 void map::LoadMap(void) {
-	if ((fp = fopen("../data/Csv/map1.csv", "r")) == NULL) {
+	// 地形
+	if ((t_fp = fopen("../data/Csv/TerrainMap.csv", "r")) == NULL) {
+		MessageBox(APP.m_hWnd, "マップ読み込みミス", "", MB_OK);
+	}
+	
+	// 建物
+	if ((b_fp = fopen("../data/Csv/BuildingMap.csv", "r")) == NULL) {
 		MessageBox(APP.m_hWnd, "マップ読み込みミス", "", MB_OK);
 	}
 
 	for (int i = 0; i < MAPHEIGHT; i++) {
 		for (int j = 0; j < MAPWIDTH; j++) {
-			fscanf(fp, "%d,", &MapData[i][j]);
+			fscanf(t_fp, "%d,", &t_MapData[i][j]);
+			fscanf(b_fp, "%d,", &b_MapData[i][j]);
 		}
 	}
 
@@ -22,28 +29,28 @@ void map::LoadMap(void) {
 		for (int j = 0; j < MAPWIDTH; j++) {
 			//行列代入
 			m[i][j].CreateMove(j * 2.0f, -5.0f, i * 2.0f);
-			int r1 = rand() % 10;
-			house[i][j] = r1;
 		}
 	}
-	fclose(fp);
+	
+	fclose(t_fp);
+	fclose(b_fp);
+
 }
 
 void map::DrawMap(void) {
 	for (int i = 0; i < MAPHEIGHT; i++) {
 		for (int j = 0; j < MAPWIDTH; j++) {
-				if (MapData[i][j] == 0) {
+				if (t_MapData[i][j] == 0) {
 					// Land表示
 					m_meshLand.Draw(&m[i][j]);
-					if (house[i][j] == 1) {
+					if (b_MapData[i][j] == 1) {
 						m_meshHouse[0].Draw(&m[i][j]);
-					} else if (house[i][j] == 2) {
+					} else if (b_MapData[i][j] == 2) {
 						m_meshHouse[1].Draw(&m[i][j]);
-					} else if (house[i][j] == 3) {
+					} else if (b_MapData[i][j] == 3) {
 						m_meshHouse[2].Draw(&m[i][j]);
 					}
-				}
-				else if (MapData[i][j] == 1) {
+				} else if (t_MapData[i][j] == 1) {
 					// Load表示
 					m_meshRoad.Draw(&m[i][j]);
 				}
