@@ -24,6 +24,7 @@ void map::LoadMap(void) {
 	m_meshHouse[0].LoadXFile("../data/Mesh/Map/House1.x");
 	m_meshHouse[1].LoadXFile("../data/Mesh/Map/House2.x");
 	m_meshHouse[2].LoadXFile("../data/Mesh/Map/House3.x");
+	m_meshHouse[3].LoadXFile("../data/Mesh/Map/building1.x");
 
 	for (int i = 0; i < MAPHEIGHT; i++) {
 		for (int j = 0; j < MAPWIDTH; j++) {
@@ -49,6 +50,8 @@ void map::DrawMap(void) {
 						m_meshHouse[1].Draw(&m[i][j]);
 					} else if (b_MapData[i][j] == 3) {
 						m_meshHouse[2].Draw(&m[i][j]);
+					} else if (b_MapData[i][j] == 4) {
+						m_meshHouse[3].Draw(&m[i][j]);
 					}
 				} else if (t_MapData[i][j] == 1) {
 					// Load•\Ž¦
