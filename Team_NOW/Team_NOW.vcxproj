@@ -134,6 +134,7 @@
     <ClCompile Include="..\src\Map\map.cpp" />
     <ClCompile Include="..\src\Scene\SGame.cpp" />
     <ClCompile Include="..\src\Scene\STitle.cpp" />
+    <ClCompile Include="..\src\System\KeyInput.cpp" />
     <ClCompile Include="..\src\System\RouteSearch.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="..\src\Scene\SceneBase.h" />
     <ClInclude Include="..\src\Scene\SGame.h" />
     <ClInclude Include="..\src\Scene\STitle.h" />
+    <ClInclude Include="..\src\System\KeyInput.h" />
     <ClInclude Include="..\src\System\RouteSearch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

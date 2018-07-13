@@ -123,6 +123,7 @@ void CApp::Release()
 {
 	// シングルトンのインスタンス削除
 	GW->DeleteInstance();
+	KINPUT->DeleteInstance();
 
 	// Direct3D解放
 	cdg.Release();
@@ -135,6 +136,7 @@ void CApp::Init()
 {
 	// シングルトンのインスタンス化
 	GW->CreateInstance();
+	KINPUT->CreateInstance();
 }
 
 //======================================================

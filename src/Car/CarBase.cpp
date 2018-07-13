@@ -24,7 +24,7 @@ void CarBase::Move(float maxSpeed)
 		Speed += 0.1f;
 	}
 
-	if (isDoubleInput()) {
+	if (KINPUT->isDoubleInput(500)) {
 		Speed = maxSpeed;
 	}
 
@@ -35,14 +35,6 @@ void CarBase::Move(float maxSpeed)
 	if (Speed > maxSpeed) {
 		Speed = maxSpeed;
 	}
-	/*if (!(GetAsyncKeyState('W') && GetAsyncKeyState('S'))) {
-		if (Speed >= 0) {
-			Speed -= reduce;
-		}
-		else {
-			Speed += reduce;
-		}
-	}*/
 	bodyMat.Move_Local(0, 0, Speed);
 
 	//ù‰ñ
@@ -85,28 +77,5 @@ void CarBase::Move(float maxSpeed)
 	tmpTireMat[TirePos::FL] = tireMat[TirePos::FL] * bodyMat;
 	tmpTireMat[TirePos::R1] = tireMat[TirePos::R1] * bodyMat;
 	tmpTireMat[TirePos::R2] = tireMat[TirePos::R2] * bodyMat;
-}
-
-boolean CarBase::isDoubleInput()
-{
-	if (GetAsyncKeyState('W') & 0x8000) {
-		if (!keyflg) {
-			//ŽžŠÔ‚ð•Û‘¶
-			time.push_back(timeGetTime());
-			
-			if (time.size() >= 2){
-				auto interval = time[1] - time[0];
-				if (interval < 500) { 
-					time.clear();
-					return true;
-				}
-				time.erase(time.begin());
-			}
-
-			keyflg = true;
-		}
-	}
-	else { keyflg = false; }
-	return false;
 }
 

@@ -13,9 +13,8 @@ public:
 	virtual void Draw();
 	void Move(float maxSpeed);
 
-	boolean isDoubleInput();
-
 	float GetSpeed() { return Speed; }
+	int GetCarType() { return carType; }
 
 	enum TirePos {
 		FR,
@@ -24,7 +23,17 @@ public:
 		R2
 	};
 
+	enum CarType {
+		Taxi,
+		Sedan,
+		Onebox,
+		Bus,
+		Truck
+	};
+
 protected:
+	int carType;
+
 	CMatrix bodyMat;
 	CMatrix tireMat[4],tmpTireMat[4];
 	CMesh Body, FTire, RTire, DTire;
@@ -33,12 +42,6 @@ protected:
 
 private:
 	float reduce = 0.01f;
-
-
-	//‚Q‰ñ“ü—Í”»’è—p‚Ì•Ï”
-private:
-	std::vector<DWORD> time;
-	bool keyflg= false;
 
 
 

@@ -16,9 +16,6 @@
     <ClCompile Include="..\src\Map\map.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\System\RouteSearch.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Scene\SGame.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -52,6 +49,12 @@
     <ClCompile Include="..\SimpleLib\Helper.cpp">
       <Filter>src\SimpleLib</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\System\RouteSearch.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\KeyInput.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Camera\Camera.h">
@@ -69,16 +72,10 @@
     <ClInclude Include="..\src\Map\map.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\System\RouteSearch.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Scene\SceneBase.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scene\SGame.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SimpleLib\SimpleLib.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scene\STitle.h">
@@ -111,6 +108,15 @@
     <ClInclude Include="..\SimpleLib\Helper.h">
       <Filter>src\SimpleLib</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\System\RouteSearch.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\KeyInput.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SimpleLib\SimpleLib.h">
+      <Filter>src\SimpleLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -118,6 +124,9 @@
     </Filter>
     <Filter Include="src\SimpleLib">
       <UniqueIdentifier>{a26de104-6d2d-44e3-99d5-adb6074755e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\System">
+      <UniqueIdentifier>{6f64151a-03d1-4769-a5de-29643f9624a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
