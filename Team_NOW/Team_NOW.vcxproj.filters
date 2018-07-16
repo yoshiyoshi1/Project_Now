@@ -4,9 +4,6 @@
     <ClCompile Include="..\src\Camera\Camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Car\CarBase.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\GameWorld.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -20,9 +17,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Scene\STitle.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Car\Taxi.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CDirectXGraphics.cpp">
@@ -55,12 +49,27 @@
     <ClCompile Include="..\src\System\KeyInput.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Car\CarBase.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Taxi.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Bus.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\OneBox.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Sedan.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Truck.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Camera\Camera.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Car\CarBase.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\GameWorld.h">
@@ -79,9 +88,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scene\STitle.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Car\Taxi.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CDirectXGraphics.h">
@@ -117,6 +123,24 @@
     <ClInclude Include="..\SimpleLib\SimpleLib.h">
       <Filter>src\SimpleLib</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Car\CarBase.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Taxi.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Bus.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\OneBox.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Sedan.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Truck.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -127,6 +151,9 @@
     </Filter>
     <Filter Include="src\System">
       <UniqueIdentifier>{6f64151a-03d1-4769-a5de-29643f9624a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Car">
+      <UniqueIdentifier>{07f3c513-45dd-431c-9c70-617712ccb54e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

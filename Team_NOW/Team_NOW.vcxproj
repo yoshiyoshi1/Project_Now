@@ -127,8 +127,12 @@
     <ClCompile Include="..\SimpleLib\CVector3.cpp" />
     <ClCompile Include="..\SimpleLib\Helper.cpp" />
     <ClCompile Include="..\src\Camera\Camera.cpp" />
+    <ClCompile Include="..\src\Car\Bus.cpp" />
     <ClCompile Include="..\src\Car\CarBase.cpp" />
+    <ClCompile Include="..\src\Car\OneBox.cpp" />
+    <ClCompile Include="..\src\Car\Sedan.cpp" />
     <ClCompile Include="..\src\Car\Taxi.cpp" />
+    <ClCompile Include="..\src\Car\Truck.cpp" />
     <ClCompile Include="..\src\GameWorld.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Map\map.cpp" />
@@ -148,8 +152,12 @@
     <ClInclude Include="..\SimpleLib\Helper.h" />
     <ClInclude Include="..\SimpleLib\SimpleLib.h" />
     <ClInclude Include="..\src\Camera\Camera.h" />
+    <ClInclude Include="..\src\Car\Bus.h" />
     <ClInclude Include="..\src\Car\CarBase.h" />
+    <ClInclude Include="..\src\Car\OneBox.h" />
+    <ClInclude Include="..\src\Car\Sedan.h" />
     <ClInclude Include="..\src\Car\Taxi.h" />
+    <ClInclude Include="..\src\Car\Truck.h" />
     <ClInclude Include="..\src\GameWorld.h" />
     <ClInclude Include="..\src\main.h" />
     <ClInclude Include="..\src\Map\map.h" />

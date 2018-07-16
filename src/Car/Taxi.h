@@ -15,7 +15,7 @@ public:
 
 private:
 
-	const float MAX_SPEED = 50;
+	const float MAX_SPEED = 20;
 	
 
 };

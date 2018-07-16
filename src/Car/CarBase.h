@@ -38,10 +38,14 @@ protected:
 	CMatrix tireMat[4],tmpTireMat[4];
 	CMesh Body, FTire, RTire, DTire;
 
+	bool isForword = false;
+	bool isBack = false;
+
 	float Speed = 0;
+	float FTireRot = 0;
 
 private:
-	float reduce = 0.01f;
+	const float reduce = 0.05f;
 
 
 
