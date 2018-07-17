@@ -69,19 +69,22 @@ void CarBase::Move(float maxSpeed)
 		//キーを押していないときタイヤの角度を戻す
 		if (!(GetAsyncKeyState('A') || GetAsyncKeyState('D'))) {
 			if (FTireRot >= 0.01f) {
-				FTireRot -= reduce*20;
+				FTireRot -= reduce * 20;
 			}
 			else if (FTireRot <= -0.01f) {
-				FTireRot += reduce*20;
+				FTireRot += reduce * 20;
 			}
-		}
 
+		}
+	}
+
+		//回転の合成
 		int pos = 0;
 		for (auto &i : tireMat) {
 			CMatrix tmpX, tmpY;
 			tmpX.CreateRotateX(Speed / 10);
-			tmpX *= beforemat;
-			beforemat = tmpX;
+			tmpX *= beforeXMat;
+			beforeXMat = tmpX;
 			if (pos <= TirePos::FL) {
 				tmpY.CreateRotateY(FTireRot);
 				i = tmpX * tmpY * tireTrans[pos];
@@ -91,7 +94,7 @@ void CarBase::Move(float maxSpeed)
 			}
 			pos++;
 		}
-	}
+	
 	/*タイヤ位置合わせ用
 	if (GetAsyncKeyState('A')) {
 	bodyMat.Move_Local(-1, 0, 0);

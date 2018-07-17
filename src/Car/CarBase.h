@@ -36,7 +36,7 @@ protected:
 
 	CMatrix bodyMat;
 	CMatrix tireMat[4],tireTrans[4],tmpTireMat[4];
-	CMatrix beforemat;
+	CMatrix beforeXMat;
 	CMesh Body, FTire, RTire, DTire;
 
 	bool isForword = false;
