@@ -73,6 +73,8 @@ void SGame::Draw(void)
 	// 描画終了
 	cdg.GetDev()->EndScene();
 
+	// バックバッファをプライマリバッファにコピー
+	cdg.GetDev()->Present(nullptr, nullptr, nullptr, nullptr);
 }
 
 
@@ -100,5 +102,5 @@ void SGame::DisplayText()
 	CMatrix m;
 	m.CreateMove(100, 100, 0);
 
-	cdg.DrawFont(ARGB_FULL, &m, "ゲーム");
+	cdg.DrawFont("ゲーム", ARGB_FULL, &m);
 }

@@ -45,6 +45,9 @@ public:
 	// マウス用
 	int		m_MouseWheelVal;
 
+	// 前回の経過時間
+	DWORD m_PrevTime = 0;
+
 //*********************************************
 // シングルトンパターン
 private:

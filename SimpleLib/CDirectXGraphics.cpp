@@ -58,9 +58,6 @@ bool CDirectXGraphics::Init(HWND hWnd, int Width, int Height, D3DFORMAT Format, 
 	//ﾊﾞｯｸﾊﾞｯﾌｧをﾛｯｸ可能にする(GetDCも可能になる)
 	m_d3dpp.Flags = D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
 
-	// 画面更新制限解除
-	//m_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
-
 	//デバイスの作成 - T&L HAL
 	// ※D3DCREATE_MULTITHREADED	…　マルチスレッドでのデバイス操作を許可
 	// ※D3DCREATE_FPU_PRESERVE		…　floatの制度を下げずに維持する(高精度なfloatを使う)
@@ -93,7 +90,7 @@ bool CDirectXGraphics::Init(HWND hWnd, int Width, int Height, D3DFORMAT Format, 
 	//=======================================================
 	// D3DXFONT作成
 	//=======================================================
-	D3DXCreateFont( m_lpD3DDev, 22, 0, 0, 1, FALSE, DEFAULT_CHARSET, 
+	D3DXCreateFont( m_lpD3DDev, 12, 0, 0, 1, FALSE, DEFAULT_CHARSET, 
                          OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, 
                          "ＭＳ Ｐゴシック", &m_lpFont );
 	m_lpFont->GetDesc(&m_FontDesc);
@@ -222,6 +219,16 @@ void CDirectXGraphics::DrawSprite(CTexture* tex, int x, int y, int w, int h, D3D
 
 	m_lpSprite->SetTransform(&m);
 	m_lpSprite->Draw(tex->GetTex(), tex->GetRect(), nullptr, nullptr, color);
+}
+
+void CDirectXGraphics::DrawFont(const char* text,  D3DCOLOR color, D3DXMATRIX* mat)
+{
+	if(text == nullptr)return;
+
+	if(mat)m_lpSprite->SetTransform(mat);
+	RECT rc = {0,0,0,0};
+	m_lpFont->DrawText(m_lpSprite, text, -1, &rc, DT_CALCRECT, color);
+	m_lpFont->DrawText(m_lpSprite, text, -1, &rc, DT_LEFT, color);
 }
 
 void CDirectXGraphics::DrawQuad(float x,float y,float w,float h,float tuCnt,float tvCnt,D3DCOLOR color)
