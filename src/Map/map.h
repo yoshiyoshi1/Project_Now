@@ -11,12 +11,17 @@ public:
 	void LoadMap(void);
 	void DrawMap(void);
 
-	FILE* fp;
-	int MapData[80][80];
-	int ret;
+	// ’nŒ`
+	FILE* t_fp;
+	int t_MapData[80][80];
+
+	// Œš•¨
+	FILE* b_fp;
+	int b_MapData[80][80];
 	
 	CMesh m_meshLand;
 	CMesh m_meshRoad;
+	CMesh m_meshHouse[5];
 	CMatrix m[80][80];
 
 };

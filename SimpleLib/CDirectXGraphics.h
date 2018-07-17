@@ -179,7 +179,22 @@ public:
 	// スプライト描画 ※BeginSprite()～EndSprite()の間で書くこと
 	void DrawSprite(CTexture* tex, D3DCOLOR color, D3DXMATRIX* mat);
 	void DrawSprite(CTexture* tex, int x, int y, int w, int h, D3DCOLOR color);	// 座標、幅、高さ指定Version
-	void DrawFont(const char* text,  D3DCOLOR color, D3DXMATRIX* mat);
+	
+	template<typename... Args>
+	void DrawFont(D3DCOLOR color, D3DXMATRIX* mat, const char* format, Args... args)	// 数値などを表示できるようにしたもの
+	{
+		if (format == nullptr)return;
+
+		if (mat)m_lpSprite->SetTransform(mat);
+		RECT rc = { 0,0,0,0 };
+
+		char tmpStr[1024];
+		sprintf_s(tmpStr, 1022, format, args...);
+		strcat(tmpStr, "\r\n");
+
+		m_lpFont->DrawText(m_lpSprite, tmpStr, -1, &rc, DT_CALCRECT, color);
+		m_lpFont->DrawText(m_lpSprite, tmpStr, -1, &rc, DT_LEFT, color);
+	}
 
 	//========================================================================
 	// 2D描画の描画設定用
