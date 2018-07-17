@@ -21,7 +21,7 @@ public:
 	
 	CMesh m_meshLand;
 	CMesh m_meshRoad;
-	CMesh m_meshHouse[4];
+	CMesh m_meshHouse[5];
 	CMatrix m[80][80];
 
 };
