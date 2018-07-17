@@ -10,12 +10,12 @@ Taxi::Taxi()
 	Body.LoadXFile("../data/Mesh/Car/Taxi/Taxi.x");
 	FTire.LoadXFile("../data/Mesh/Car/Tire/FrontTire.x");
 	RTire.LoadXFile("../data/Mesh/Car/Tire/RearTire.x");
-	bodyMat.CreateMove(0, -7, 0);
+	bodyMat.CreateMove(0, -7, -10);
 	bodyMat.Scale_Local(0.005f, 0.005f, 0.005f);
 
-	tireMat[TirePos::FR].CreateMove(45, -26, 54);
-	tireMat[TirePos::FL].CreateMove(-45, -26, 54);
-	tireMat[TirePos::R1].CreateMove(0, -26, -54);
+	tireTrans[TirePos::FR].CreateMove(45, -26, 54);
+	tireTrans[TirePos::FL].CreateMove(-45, -26, 54);
+	tireTrans[TirePos::R1].CreateMove(0, -26, -54);
 }
 
 Taxi::~Taxi()

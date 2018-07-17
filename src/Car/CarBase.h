@@ -17,10 +17,10 @@ public:
 	int GetCarType() { return carType; }
 
 	enum TirePos {
-		FR,
-		FL,
-		R1,
-		R2
+		FR,	//‰^“]È‘¤
+		FL,	//•èÈ‘¤
+		R1,	//Œã—Ö1‚Â–Ú
+		R2	//Œã—Ö2‚Â–Ú
 	};
 
 	enum CarType {
@@ -35,7 +35,8 @@ protected:
 	int carType;
 
 	CMatrix bodyMat;
-	CMatrix tireMat[4],tmpTireMat[4];
+	CMatrix tireMat[4],tireTrans[4],tmpTireMat[4];
+	CMatrix beforemat;
 	CMesh Body, FTire, RTire, DTire;
 
 	bool isForword = false;

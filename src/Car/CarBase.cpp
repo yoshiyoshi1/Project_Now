@@ -51,50 +51,47 @@ void CarBase::Move(float maxSpeed)
 
 		bodyMat.Move_Local(0, 0, Speed);
 	}
+
 	//旋回
 	{
-		if (isForword || isBack) {
-			if (GetAsyncKeyState('D')) {
-				bodyMat.RotateY_Local(1.5f);
-				FTireRot += 0.1f;
-			}
-			if (GetAsyncKeyState('A')) {
-				bodyMat.RotateY_Local(-1.5f);
-				FTireRot -= 0.1f;
-			}
+
+		if (GetAsyncKeyState('D')) {
+			bodyMat.RotateY_Local(1.5f);
+			FTireRot += 2.0f;
 		}
-		if (!(GetAsyncKeyState('D') || GetAsyncKeyState('A'))) {
+		if (GetAsyncKeyState('A')) {
+			bodyMat.RotateY_Local(-1.5f);
+			FTireRot -= 2.0f;
+		}
+		if (FTireRot >= 45) { FTireRot = 45; }
+		if (FTireRot <= -45) { FTireRot = -45; }
+
+		//キーを押していないときタイヤの角度を戻す
+		if (!(GetAsyncKeyState('A') || GetAsyncKeyState('D'))) {
 			if (FTireRot >= 0.01f) {
-				FTireRot -= 0.05f;
+				FTireRot -= reduce*20;
 			}
-			else if (FTireRot) {
-				FTireRot += 0.05f;
+			else if (FTireRot <= -0.01f) {
+				FTireRot += reduce*20;
 			}
 		}
 
-		/*CMatrix tmpX, tmpY;
-
-		tmpX.CreateRotateX(Speed);
-		tmpY.CreateRotateY(FTireRot);
-
-		tireMat[TirePos::FR] = tmpY * tmpX*tireMat[TirePos::FR];*/
-
-		//タイヤのX軸回転
-		/*for (auto &i : tireMat) {
-			i.RotateX_Local(Speed);
-
-		}*/
-		//前タイヤのY軸回転
-		CMatrix tmp[2];
-
-		for (int i = 0; i <= TirePos::FL; i++) {
-			tmp[i].CreateRotateY(FTireRot);
-			tireMat[i] = tmp[i]*tireMat[i];
+		int pos = 0;
+		for (auto &i : tireMat) {
+			CMatrix tmpX, tmpY;
+			tmpX.CreateRotateX(Speed / 10);
+			tmpX *= beforemat;
+			beforemat = tmpX;
+			if (pos <= TirePos::FL) {
+				tmpY.CreateRotateY(FTireRot);
+				i = tmpX * tmpY * tireTrans[pos];
+			}
+			else {
+				i = tmpX * tireTrans[pos];
+			}
+			pos++;
 		}
 	}
-
-	
-
 	/*タイヤ位置合わせ用
 	if (GetAsyncKeyState('A')) {
 	bodyMat.Move_Local(-1, 0, 0);
@@ -117,7 +114,7 @@ void CarBase::Move(float maxSpeed)
 
 
 	//車体とタイヤの親子構造
-	for (auto i : tmpTireMat) { i.CreateIdentity(); }
+	for (auto &i : tmpTireMat) { i.CreateIdentity(); }
 	tmpTireMat[TirePos::FR] = tireMat[TirePos::FR] * bodyMat;
 	tmpTireMat[TirePos::FL] = tireMat[TirePos::FL] * bodyMat;
 	tmpTireMat[TirePos::R1] = tireMat[TirePos::R1] * bodyMat;
