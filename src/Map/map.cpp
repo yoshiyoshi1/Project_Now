@@ -39,27 +39,29 @@ void map::LoadMap(void) {
 
 }
 
-void map::DrawMap(void) {
+void map::DrawMap(CVector3 _pos) {
 	for (int i = 0; i < MAPHEIGHT; i++) {
 		for (int j = 0; j < MAPWIDTH; j++) {
-				if (t_MapData[i][j] == 0) {
-					// Land表示
-					m_meshLand.Draw(&m[i][j]);
-					if (b_MapData[i][j] == 1) {
-						m_meshHouse[0].Draw(&m[i][j]);
-					} else if (b_MapData[i][j] == 2) {
-						m_meshHouse[1].Draw(&m[i][j]);
-					} else if (b_MapData[i][j] == 3) {
-						m_meshHouse[2].Draw(&m[i][j]);
-					} else if (b_MapData[i][j] == 4) {
-						m_meshHouse[3].Draw(&m[i][j]);
-					} else if (b_MapData[i][j] == 5) {
-						m_meshHouse[4].Draw(&m[i][j]);
-					}
-				} else if (t_MapData[i][j] == 1) {
-					// Load表示
-					m_meshRoad.Draw(&m[i][j]);
+			if (!(_pos.x >(m[i][j].GetPos().x - 25) && (_pos.x < (m[i][j].GetPos().x + 25))))continue;
+			if (!(_pos.z > (m[i][j].GetPos().z - 30) && (_pos.z < (m[i][j].GetPos().z))))continue;
+			if (t_MapData[i][j] == 0) {
+				// Land表示
+				m_meshLand.Draw(&m[i][j]);
+				if (b_MapData[i][j] == 1) {
+					m_meshHouse[0].Draw(&m[i][j]);
+				} else if (b_MapData[i][j] == 2) {
+					m_meshHouse[1].Draw(&m[i][j]);
+				} else if (b_MapData[i][j] == 3) {
+					m_meshHouse[2].Draw(&m[i][j]);
+				} else if (b_MapData[i][j] == 4) {
+					m_meshHouse[3].Draw(&m[i][j]);
+				} else if (b_MapData[i][j] == 5) {
+					m_meshHouse[4].Draw(&m[i][j]);
 				}
+			} else if (t_MapData[i][j] == 1) {
+				// Load表示
+				m_meshRoad.Draw(&m[i][j]);
+			}
 		}
 	}
 }

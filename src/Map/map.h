@@ -9,7 +9,7 @@ private:
 public:
 
 	void LoadMap(void);
-	void DrawMap(void);
+	void DrawMap(CVector3 _pos);
 
 	// ínå`
 	FILE* t_fp;
