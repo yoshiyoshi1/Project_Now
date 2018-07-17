@@ -6,6 +6,7 @@ private:
 	const int		MAPWIDTH = 80;
 	const int		MAPHEIGHT = 80;
 
+	void LoadXFile(void);
 public:
 
 	void LoadMap(void);
@@ -22,6 +23,7 @@ public:
 	CMesh m_meshLand;
 	CMesh m_meshRoad;
 	CMesh m_meshHouse[5];
+
 	CMatrix m[80][80];
 
 };
