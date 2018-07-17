@@ -25,6 +25,10 @@ public :
 		m_DisToBase = f;
 	}
 
+	CVector3 GetvPos(void) {
+		return m_vPos;
+	}
+
 private:
 	CMatrix m_mProj;
 	CMatrix m_mView;
