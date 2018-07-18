@@ -4,7 +4,7 @@
 namespace SimpleLib{
 
 //============================================================================
-// ３次元ベクトルクラス
+// 2次元ベクトルクラス
 //	D2DXVECTOR2の機能拡張版
 //============================================================================
 class CVector2 : public D3DXVECTOR2{
@@ -14,7 +14,7 @@ public:
 		x = 0;
 		y = 0;
 	}
-	CVector2(float fx,float fy,float fz){
+	CVector2(float fx,float fy){
 		x = fx;
 		y = fy;
 	}
@@ -23,7 +23,7 @@ public:
 		y = In.y;
 	}
 
-	void Set(float fx,float fy,float fz){
+	void Set(float fx,float fy){
 		x = fx;
 		y = fy;
 	}

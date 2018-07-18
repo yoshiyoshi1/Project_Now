@@ -66,6 +66,15 @@
     <ClCompile Include="..\src\Map\map.cpp">
       <Filter>src\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\System\Node.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\RouteSearch2.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\Node2.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\GameWorld.h">
@@ -118,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="..\src\Map\map.h">
       <Filter>src\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Node.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\RouteSearch2.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Node2.h">
+      <Filter>src\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

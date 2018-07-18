@@ -10,8 +10,10 @@ Camera::Camera()
 	
 	m_vOffset.Set(0.0f, 1.0f, 0.0f);
 
-	m_mRot.CreateRotateY(180);
-	m_mRot.RotateX_Local(-45);
+	m_mRot.CreateRotateY(135);
+	m_mRot.RotateX_Local(-30);
+
+	m_DisToBase = 4;
 }
 
 Camera::~Camera()
