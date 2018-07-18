@@ -1,61 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\src\Camera\Camera.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <Filter Include="src">
+      <UniqueIdentifier>{cc1e2741-407c-46be-8920-83a76f23205e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{1479fd21-fa21-467a-8e86-cccb865d9165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Camera">
+      <UniqueIdentifier>{fb86cc63-908e-43f7-9121-ea6a89d0cfee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SimpleLib">
+      <UniqueIdentifier>{8ab0c575-6f05-47bd-b59e-955e0202e01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\System">
+      <UniqueIdentifier>{c52e9831-2ebc-46d9-90ec-aa85edd2c3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Map">
+      <UniqueIdentifier>{c26f30c2-fa5b-4ea8-9f93-6db74d8dcaca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Car">
+      <UniqueIdentifier>{dc358d1f-3951-464d-9dab-b093534c2a4d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\src\GameWorld.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Map\map.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Scene\SGame.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Scene\STitle.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Camera\Camera.cpp">
+      <Filter>src\Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CDirectXGraphics.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CMatrix.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CMesh.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CSurface.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CTexture.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CVector2.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\CVector3.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\SimpleLib\Helper.cpp">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClCompile>
     <ClCompile Include="..\src\System\RouteSearch.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Map\map.cpp">
+      <Filter>src\Map</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\System\KeyInput.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Car\CarBase.cpp">
-      <Filter>src\Car</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Car\Taxi.cpp">
-      <Filter>src\Car</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Car\Bus.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\CarBase.cpp">
       <Filter>src\Car</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Car\OneBox.cpp">
@@ -64,72 +84,72 @@
     <ClCompile Include="..\src\Car\Sedan.cpp">
       <Filter>src\Car</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Car\Taxi.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\Car\Truck.cpp">
       <Filter>src\Car</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Camera\Camera.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\GameWorld.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\main.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Map\map.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Scene\SceneBase.h">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scene\SGame.h">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scene\STitle.h">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Camera\Camera.h">
+      <Filter>src\Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CDirectXGraphics.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CMatrix.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CMesh.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CSurface.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CTexture.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CVector2.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\CVector3.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleLib\Helper.h">
-      <Filter>src\SimpleLib</Filter>
+      <Filter>SimpleLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SimpleLib\SimpleLib.h">
+      <Filter>SimpleLib</Filter>
     </ClInclude>
     <ClInclude Include="..\src\System\RouteSearch.h">
       <Filter>src\System</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Map\map.h">
+      <Filter>src\Map</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\System\KeyInput.h">
       <Filter>src\System</Filter>
     </ClInclude>
-    <ClInclude Include="..\SimpleLib\SimpleLib.h">
-      <Filter>src\SimpleLib</Filter>
+    <ClInclude Include="..\src\Car\Bus.h">
+      <Filter>src\Car</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Car\CarBase.h">
-      <Filter>src\Car</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Car\Taxi.h">
-      <Filter>src\Car</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Car\Bus.h">
       <Filter>src\Car</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Car\OneBox.h">
@@ -138,22 +158,11 @@
     <ClInclude Include="..\src\Car\Sedan.h">
       <Filter>src\Car</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Car\Taxi.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\Car\Truck.h">
       <Filter>src\Car</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{595bfbd8-c67a-428c-928e-ce8d2118361e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\SimpleLib">
-      <UniqueIdentifier>{a26de104-6d2d-44e3-99d5-adb6074755e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\System">
-      <UniqueIdentifier>{6f64151a-03d1-4769-a5de-29643f9624a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Car">
-      <UniqueIdentifier>{07f3c513-45dd-431c-9c70-617712ccb54e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
 </Project>

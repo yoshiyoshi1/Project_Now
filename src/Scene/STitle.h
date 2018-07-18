@@ -11,11 +11,9 @@
 #include "SceneBase.h"
 
 class Camera;
-
 class map;
 
 class Taxi;
-
 
 class STitle :public SceneBase 
 {
@@ -36,6 +34,8 @@ private:
 	Camera* m_Cam;
 	map* m_map;
 
+	Taxi* m_Car;
+
 	// 表示テスト用
 	CTexture m_texSample[2];
 	CMesh m_meshSample;
@@ -43,9 +43,6 @@ private:
 
 	float r;
 
-	int m_test[10][10];
-	
-	Taxi* car;
 };
 
 #endif

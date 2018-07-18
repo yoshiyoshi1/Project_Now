@@ -10,7 +10,7 @@ Taxi::Taxi()
 	Body.LoadXFile("../data/Mesh/Car/Taxi/Taxi.x");
 	FTire.LoadXFile("../data/Mesh/Car/Tire/FrontTire.x");
 	RTire.LoadXFile("../data/Mesh/Car/Tire/RearTire.x");
-	bodyMat.CreateMove(0, -7, -10);
+	bodyMat.CreateMove(0, -3.5f, 0);
 	bodyMat.Scale_Local(0.005f, 0.005f, 0.005f);
 
 	tireTrans[TirePos::FR].CreateMove(45, -26, 54);

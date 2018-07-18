@@ -165,31 +165,30 @@ int CApp::Loop()
 		}
 		// ゲーム処理
 		else{
-			DWORD st = timeGetTime();	// 開始時間を取得
-
+			
 			//------------------------------------------
-			// 処理・描画
+			// FPS処理
 			//------------------------------------------
-			/*
-			// FPS制御 (60FPS)
 			DWORD NowTime = timeGetTime();
-			if ((NowTime - m_PrevTime) >= 1000 / 60) {
-				m_PrevTime = NowTime;
-			}
-			*/
+			static DWORD PrevTime = 0;
+			if ((NowTime - PrevTime) < 1000 / 60)continue;
 
+			//------------------------------------------
+			// ゲームの処理・描画
+			//------------------------------------------
 			GW->Update();
+			
 			GW->Draw();
-
-			//------------------------------------------
-			// 描画
-			//------------------------------------------
 			cdg.GetDev()->Present(nullptr, nullptr, nullptr, nullptr);
 
 
+			//------------------------------------------
+			// その他の処理
+			//------------------------------------------
 			// ホイール値はリセット
 			m_MouseWheelVal = 0;
 
+			PrevTime = NowTime;
 			m_FrameCnt++;
 		}
 		
