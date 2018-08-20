@@ -2,6 +2,7 @@
 #define __main_h__
 
 #include "../SimpleLib/SimpleLib.h"
+
 using namespace SimpleLib;
 
 //============================================================
@@ -69,38 +70,6 @@ public:
 //*********************************************
 
 };
-
-//========================================================
-// その他のデータ
-//========================================================
-
-// 今回使用する頂点フォーマットの定義
-struct VERTEX
-{
-	D3DXVECTOR3 Pos;
-	D3DCOLOR Color;
-	D3DXVECTOR2 Tex;
-};
-
-static const int POLY_VERTEX = 4;	// 板ポリゴンの頂点数
-
-struct XFILE
-{
-	LPD3DXMESH lpMesh;
-	DWORD NumMaterial;
-	D3DMATERIAL9 *Mat;
-	LPDIRECT3DTEXTURE9 *Tex;
-};
-
-struct CLONEVERTEX
-{
-	D3DXVECTOR3 Pos;
-	D3DXVECTOR3 Normal;
-	D3DXVECTOR2 Tex;
-};
-
-#define	FVF_VERTEX (D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1)
-
 
 #define APP CApp::GetInstance()
 

@@ -13,6 +13,8 @@ GameWorld::GameWorld() {
 
 	// ‰Šú‰æ–Ê‚Íƒ^ƒCƒgƒ‹‰æ–Ê
 	m_lpNowScene = new STitle();
+
+	INIT_RANDOM;
 }
 
 GameWorld::~GameWorld() {

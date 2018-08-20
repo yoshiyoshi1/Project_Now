@@ -23,7 +23,7 @@
       <UniqueIdentifier>{b2ee1ffb-140e-4435-9050-1ed4b4e4ba8d}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Car">
-      <UniqueIdentifier>{5ad49c55-1b64-4e30-8ac0-588966324e7a}</UniqueIdentifier>
+      <UniqueIdentifier>{feac2d6a-08ae-42b0-a272-948248d09932}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +93,18 @@
     <ClCompile Include="..\src\Car\Truck.cpp">
       <Filter>src\Car</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\System\Node.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\ThreadGuard.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\Timer.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\KeyInput.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\GameWorld.h">
@@ -149,9 +161,6 @@
     <ClInclude Include="..\src\Human\human.h">
       <Filter>src\Human</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Car\Truck.h">
-      <Filter>src\Car</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Car\Bus.h">
       <Filter>src\Car</Filter>
     </ClInclude>
@@ -166,6 +175,21 @@
     </ClInclude>
     <ClInclude Include="..\src\Car\Taxi.h">
       <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Truck.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\KeyInput.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Node.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\ThreadGuard.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Timer.h">
+      <Filter>src\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

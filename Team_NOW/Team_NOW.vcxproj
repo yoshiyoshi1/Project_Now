@@ -139,7 +139,11 @@
     <ClCompile Include="..\src\Map\map.cpp" />
     <ClCompile Include="..\src\Scene\SGame.cpp" />
     <ClCompile Include="..\src\Scene\STitle.cpp" />
+    <ClCompile Include="..\src\System\KeyInput.cpp" />
+    <ClCompile Include="..\src\System\Node.cpp" />
     <ClCompile Include="..\src\System\RouteSearch.cpp" />
+    <ClCompile Include="..\src\System\ThreadGuard.cpp" />
+    <ClCompile Include="..\src\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SimpleLib\CDirectXGraphics.h" />
@@ -165,7 +169,11 @@
     <ClInclude Include="..\src\Scene\SceneBase.h" />
     <ClInclude Include="..\src\Scene\SGame.h" />
     <ClInclude Include="..\src\Scene\STitle.h" />
+    <ClInclude Include="..\src\System\KeyInput.h" />
+    <ClInclude Include="..\src\System\Node.h" />
     <ClInclude Include="..\src\System\RouteSearch.h" />
+    <ClInclude Include="..\src\System\ThreadGuard.h" />
+    <ClInclude Include="..\src\System\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

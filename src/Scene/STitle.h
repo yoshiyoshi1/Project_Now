@@ -14,6 +14,10 @@ class Camera;
 class map;
 class human;
 
+class Taxi;
+
+class RouteSearch;
+
 class STitle :public SceneBase 
 {
 public:
@@ -34,6 +38,8 @@ private:
 	map* m_map;
 	human* m_human;
 
+	Taxi* m_Car;
+
 	// 表示テスト用
 	CTexture m_texSample[2];
 	CMesh m_meshSample;
@@ -41,6 +47,7 @@ private:
 
 	float r;
 
+	RouteSearch* m_Route;
 };
 
 #endif
