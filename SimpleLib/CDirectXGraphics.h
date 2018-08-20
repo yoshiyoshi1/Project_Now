@@ -222,6 +222,11 @@ public:
 	// 3Dの四角形を描画
 	void DrawQuad3D(float LSize, float RSize, float TSize, float BSize, float tuCnt = 1, float tvCnt = 1, D3DXCOLOR color = 0xFFFFFFFF);
 
+	//========================================================================
+	// フォグ
+	//========================================================================
+	void SetFog(int mode, D3DCOLOR color, float start, float end);
+
 
 private:
 

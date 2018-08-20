@@ -65,6 +65,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <thread>
 
 //===============================================
 // SimpleLib
@@ -78,5 +79,10 @@
 #include "CDirectXGraphics.h"
 #include "CSurface.h"
 #include "CMesh.h"
+
+//===============================================
+// System
+//===============================================
+#include "../src/System/KeyInput.h"
 
 #endif

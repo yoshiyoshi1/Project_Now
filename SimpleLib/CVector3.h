@@ -84,8 +84,11 @@ public:
 	}
 
 	// 外積
-	static void Cross(D3DXVECTOR3 *vOut,const D3DXVECTOR3 *v1,const D3DXVECTOR3 *v2){// 静的関数
-		D3DXVec3Cross(vOut,v1,v2);
+	static void Cross(D3DXVECTOR3 *vOut, const D3DXVECTOR3 *v1, const D3DXVECTOR3 *v2) {// 静的関数
+		D3DXVec3Cross(vOut, v1, v2);
+	}
+	void Cross(const D3DXVECTOR3 *v1, const D3DXVECTOR3 *v2) {
+		D3DXVec3Cross(this, v1, v2);
 	}
 	// 外積 自分 x vBack
 	void CrossBack(D3DXVECTOR3 *vOut,const D3DXVECTOR3 *vBack){

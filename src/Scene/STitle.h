@@ -12,6 +12,7 @@
 
 class Camera;
 class map;
+class human;
 
 class STitle :public SceneBase 
 {
@@ -31,6 +32,7 @@ public:
 private:
 	Camera* m_Cam;
 	map* m_map;
+	human* m_human;
 
 	// 表示テスト用
 	CTexture m_texSample[2];

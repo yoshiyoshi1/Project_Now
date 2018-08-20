@@ -93,7 +93,7 @@ bool CDirectXGraphics::Init(HWND hWnd, int Width, int Height, D3DFORMAT Format, 
 	//=======================================================
 	// D3DXFONTì¬
 	//=======================================================
-	D3DXCreateFont( m_lpD3DDev, 22, 0, 0, 1, FALSE, DEFAULT_CHARSET, 
+	D3DXCreateFont( m_lpD3DDev, 24, 0, 0, 1, FALSE, DEFAULT_CHARSET, 
                          OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, 
                          "‚l‚r ‚oƒSƒVƒbƒN", &m_lpFont );
 	m_lpFont->GetDesc(&m_FontDesc);
@@ -288,5 +288,22 @@ void CDirectXGraphics::DrawQuad3D(float LSize,float RSize,float TSize,float BSiz
 
 	m_lpD3DDev->SetFVF(D3DFVF_XYZ | D3DFVF_TEX1);
 	m_lpD3DDev->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, v, sizeof(VERTEX));
+
+}
+
+void CDirectXGraphics::SetFog(int mode, D3DCOLOR color, float start, float end)
+{
+	// ƒtƒHƒO‚ÌÝ’è
+	m_lpD3DDev->SetRenderState(D3DRS_FOGENABLE, TRUE);
+	m_lpD3DDev->SetRenderState(D3DRS_FOGCOLOR, color);
+
+	if (mode == 0) {
+		m_lpD3DDev->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+	}
+	else {
+		m_lpD3DDev->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR);
+	}
+	m_lpD3DDev->SetRenderState(D3DRS_FOGSTART, *(DWORD*)(&start));
+	m_lpD3DDev->SetRenderState(D3DRS_FOGEND, *(DWORD*)(&end));
 
 }

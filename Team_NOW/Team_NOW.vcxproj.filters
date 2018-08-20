@@ -19,6 +19,12 @@
     <Filter Include="src\Map">
       <UniqueIdentifier>{c26f30c2-fa5b-4ea8-9f93-6db74d8dcaca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Human">
+      <UniqueIdentifier>{b2ee1ffb-140e-4435-9050-1ed4b4e4ba8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Car">
+      <UniqueIdentifier>{5ad49c55-1b64-4e30-8ac0-588966324e7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\GameWorld.cpp">
@@ -65,6 +71,27 @@
     </ClCompile>
     <ClCompile Include="..\src\Map\map.cpp">
       <Filter>src\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Human\human.cpp">
+      <Filter>src\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Bus.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\CarBase.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\OneBox.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Sedan.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Taxi.cpp">
+      <Filter>src\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Car\Truck.cpp">
+      <Filter>src\Car</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +145,27 @@
     </ClInclude>
     <ClInclude Include="..\src\Map\map.h">
       <Filter>src\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Human\human.h">
+      <Filter>src\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Truck.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Bus.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\CarBase.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\OneBox.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Sedan.h">
+      <Filter>src\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Car\Taxi.h">
+      <Filter>src\Car</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

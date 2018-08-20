@@ -19,6 +19,15 @@ public:
 	D3DMATERIAL9*				GetMaterials(){return m_Materials;}		// マテリアルテーブル取得
 	LPD3DXBUFFER				GetAdjacency(){return m_lpAdjacency;}	// 隣接性データ取得
 
+	
+	CVector3 GetNormalVec(int polyNo, CMatrix* mWorld)					// 法線ベクトルを取得
+	{ 
+		CVector3 tmpVec = m_NormalVec[polyNo];
+		tmpVec.TransformNormal(mWorld);			
+		tmpVec.Normalize();
+		return tmpVec; 
+	}
+
 	//===============================================================================================
 	// 読み込み
 	//===============================================================================================
@@ -36,6 +45,7 @@ public:
 	//===============================================================================================
 	void Draw();									// メッシュ描画
 	void Draw(D3DXMATRIX* matrix);
+	void Draw(D3DXMATRIX* matrix, D3DXCOLOR color);
 
 	// 
 	CMesh();
@@ -54,11 +64,15 @@ private:
 	LPD3DXBUFFER				m_lpAdjacency;	// 隣接性データ
 	std::string					m_FileName;		// ファイル名
 
+	CVector3*					m_NormalVec;	// 法線ベクトル
+	
 
 private:
 	// コピー禁止用
 	CMesh(const CMesh& src){}
 	void operator=(const CMesh& src){}
+
+	void SetPolyNormal();
 };
 
 }
