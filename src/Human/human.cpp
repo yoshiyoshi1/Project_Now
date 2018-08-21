@@ -9,10 +9,10 @@ void human::LoadHuman(void) {
 	int r1, r2;
 	do {	
 		d[i] = rand() % 2;
-		r1 = rand() % 75;
-		r2 = rand() % 75;
-		if (m_RouteData[r1][r2] == 0 && m_RouteData[r1][r2 - 1] == 1) {
-			m[i].CreateMove(r1*2.0f, -3.8f, (r2*2.0f) + 1.0f);
+		r1 = rand() % 80;
+		r2 = rand() % 80;
+		if (m_RouteData[r1][r2] == 1 && m_RouteData[r1 - 1][r2] == 0) {
+			m[i].CreateMove((r2 *2.0f), -3.8f, ((r1 * 2.0f) - 1.1f));
 			i++;
 		}
 	} while (i < MAX_HUMAN);
