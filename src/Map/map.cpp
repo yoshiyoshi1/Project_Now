@@ -16,8 +16,8 @@ void map::LoadMap(void) {
 		MessageBox(APP.m_hWnd, "マップ読み込みミス", "", MB_OK);
 	}
 
-	for (int i = 0; i < MAPHEIGHT; i++) {
-		for (int j = 0; j < MAPWIDTH; j++) {
+	for (int i = 0; i < SIZE_X; i++) {
+		for (int j = 0; j < SIZE_Y; j++) {
 			fscanf(t_fp, "%d,", &t_MapData[i][j]);
 			fscanf(b_fp, "%d,", &b_MapData[i][j]);
 			//行列代入
@@ -47,8 +47,8 @@ void map::DrawMap(CVector3 _pos) {
 		}	
 	}
 
-	for (int i = 0; i < MAPHEIGHT; i++) {
-		for (int j = 0; j < MAPWIDTH; j++) {
+	for (int i = 0; i < SIZE_X; i++) {
+		for (int j = 0; j < SIZE_Y; j++) {
 			if (!(_pos.x >(m[i][j].GetPos().x - 25) && (_pos.x < (m[i][j].GetPos().x + 25))))continue;
 			if (!(_pos.z > (m[i][j].GetPos().z - 30) && (_pos.z < (m[i][j].GetPos().z + 5))))continue;
 				// Load表示

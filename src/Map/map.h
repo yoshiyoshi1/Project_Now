@@ -2,13 +2,12 @@
 #define __map_h__
 
 class map {
-private:
-	const int		MAPWIDTH = 80;		// Map最大横幅
-	const int		MAPHEIGHT = 80;	// Map最大縦幅
+public:
+	static const int SIZE_X = 80;
+	static const int SIZE_Y = 80;
 
 	void LoadXFile(void);						// メッシュデータ読み込み
 
-public:
 	void LoadMap(void);						// mapの読み込み
 	void DrawMap(CVector3 _pos);		// mapの描画
 
@@ -20,6 +19,7 @@ public:
 	FILE* b_fp;									// 建物fileポインタ
 	int b_MapData[80][80];					// 建物mapデータ
 	
+private:
 	CMesh m_meshLand;					// 地形メッシュ
 	CMesh m_meshRoad;					// 道路メッシュ
 	CMesh m_meshSee;						// 海メッシュ
