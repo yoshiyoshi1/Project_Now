@@ -6,6 +6,7 @@ public:
 	void LoadXFile(void);							// メッシュデータ読み込み													
 	void SetMapData(int* mapData);		// マップ情報をセットする関数
 	void LoadHuman(void);						// humanの読み込み
+	void Update(void);					// humanの更新
 	void DrawHuman(CVector3 _pos);		// humanの描画
 
 private:
@@ -15,11 +16,15 @@ private:
 
 	int m_RouteData[SIZE_Y][SIZE_X];	// マップの情報
 	int d[MAX_HUMAN];							// 乱数用
+	float move;
+	bool moveflg;
 
 	CMesh m_meshBoy;							// 男メッシュ
 	CMesh m_meshGirl;							// 女メッシュ
+	CMesh m_meshIcon;							// アイコンメッシュ
 
 	CMatrix m[MAX_HUMAN];				// human行列
+	CMatrix micon[MAX_HUMAN];			// human行列
 
 };
 #endif
