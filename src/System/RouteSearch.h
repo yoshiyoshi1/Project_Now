@@ -62,6 +62,22 @@ public:
 		return m_EndTime;
 	}
 
+	// 探索アルゴリズムを変更する関数
+	void ChangeSearchMode()
+	{
+		if (m_SearchMode == SearchMode::ASTAR) {
+			m_NextSearchMode = SearchMode::DIJKSTRA;
+		}
+		else if (m_SearchMode == SearchMode::DIJKSTRA) {
+			m_NextSearchMode = SearchMode::ASTAR;
+		}
+	}
+	// 現在の探索アルゴリズムを取得する関数
+	int GetSearchMode()
+	{
+		return m_NextSearchMode;
+	}
+
 private:
 
 	void Reset(Position pos);
@@ -70,24 +86,33 @@ private:
 	int GetCount(int status);
 	float GetDistance(Position pos);
 	int BackTrace(Position pos);
-	bool Search();
+	bool Search_AStar();
+	bool Search_Dijkstra();
 	
+public:
+
+	// 探索アルゴリズム
+	enum SearchMode {
+		ASTAR,		// A*(A-Star)
+		DIJKSTRA	// ダイクストラ法
+	};
+
 private:
-	//-----------------------------
-	// テストデータ
-	static const int SIZE_X = 80;
-	static const int SIZE_Y = 80;
 
 	//-----------------------------
 	// 時間 計測用
 	DWORD m_EndTime;			// 計測終了時間
 	Timer* m_MeasureTimer;		// 計測用タイマー
+	Timer* m_UpdateTimer;		// 更新のタイミングを測る用
 
 	//-----------------------------
 
-	int m_RouteData[SIZE_Y][SIZE_X];	// マップの情報
-	Node m_NodeData[SIZE_Y][SIZE_X];	// ノードの情報
-	Node* m_LastSearchNode = nullptr;	// 最後に探索したノード
+	int m_SearchMode;			// どの探索アルゴリズムを使用するか
+	int m_NextSearchMode;		// 次の探索でどのアルゴリズムを使用するか
+
+	int** m_RouteData;			// マップの情報
+	Node** m_NodeData;			// ノードの情報
+	Node* m_LastSearchNode;		// 最後に探索したノード
 
 	Position m_StartPos;		// 探索開始地点
 	Position m_GoalPos;			// 探索の目的地
@@ -96,7 +121,6 @@ private:
 	
 	CMesh m_meshPin;			// ルートを表すピンのメッシュ
 	std::thread m_SearchThread;	// 探索用スレッド
-	Timer* m_UpdateTimer;		// 更新のタイミングを測る用
 
 };
 

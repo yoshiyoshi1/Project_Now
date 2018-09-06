@@ -20,7 +20,7 @@ public:
 	LPD3DXBUFFER				GetAdjacency(){return m_lpAdjacency;}	// 隣接性データ取得
 
 	
-	CVector3 GetNormalVec(int polyNo, CMatrix* mWorld)					// 法線ベクトルを取得
+	CVector3 GetNormalVec(DWORD polyNo, CMatrix* mWorld)					// 法線ベクトルを取得
 	{ 
 		CVector3 tmpVec = m_NormalVec[polyNo];
 		tmpVec.TransformNormal(mWorld);			
@@ -69,8 +69,8 @@ private:
 
 private:
 	// コピー禁止用
-	CMesh(const CMesh& src){}
-	void operator=(const CMesh& src){}
+	//CMesh(const CMesh& src){}
+	//void operator=(const CMesh& src){}
 
 	void SetPolyNormal();
 };

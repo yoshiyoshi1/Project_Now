@@ -74,6 +74,12 @@ BOOL CMesh::LoadXFile(LPDIRECT3DDEVICE9 lpD3DDev,const char *lpFileName)
 	// 作業用マテリアル バッファ開放
 	SAFE_RELEASE(pD3DXMtrlBuffer);
 
+	LPD3DXMESH lpTmp;									// メッシュクローン用変数
+	m_lpMesh->CloneMeshFVF(D3DXMESH_MANAGED | D3DXMESH_NPATCHES,		// クローン生成
+		D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1, lpD3DDev, &lpTmp);
+	m_lpMesh->Release();
+	m_lpMesh = lpTmp;
+
 	SetPolyNormal();
 
 	return TRUE;
@@ -105,6 +111,7 @@ void CMesh::Release()
 	SAFE_RELEASE(m_lpMesh);
 
 	m_FileName = "";
+
 }
 
 void CMesh::Draw()
@@ -157,8 +164,8 @@ void CMesh::SetPolyNormal()
 	struct VERTEXDATA
 	{
 		CVector3 pos;		// D3DFVF_XYZ  
-		//CVector3 normal;	// D3DFVF_NORMAL
-		//CVector2 tex;		// D3DFVF_TEX1
+		CVector3 normal;	// D3DFVF_NORMAL
+		CVector2 tex;		// D3DFVF_TEX1
 	};
 
 	DWORD polyMax;	// ポリゴン数
@@ -186,6 +193,7 @@ void CMesh::SetPolyNormal()
 		vPos[2] = (pVertex + vertexNo[2])->pos;
 		m_lpMesh->UnlockVertexBuffer();
 		pVertex = nullptr;
+		
 
 		// ------- 頂点からポリゴンの法線方向を取得する ---------
 		CVector3 vec1, vec2;

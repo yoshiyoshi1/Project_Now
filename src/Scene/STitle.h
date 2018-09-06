@@ -10,14 +10,6 @@
 
 #include "SceneBase.h"
 
-class Camera;
-class map;
-class human;
-
-class Taxi;
-
-class RouteSearch;
-
 class STitle :public SceneBase 
 {
 public:
@@ -34,20 +26,7 @@ public:
 	void DisplayText()override;
 
 private:
-	Camera* m_Cam;
-	map* m_map;
-	human* m_human;
 
-	Taxi* m_Car;
-
-	// 表示テスト用
-	CTexture m_texSample[2];
-	CMesh m_meshSample;
-	CMatrix m_mTest;	// 注視対象の行列
-
-	float r;
-
-	RouteSearch* m_Route;
 };
 
 #endif

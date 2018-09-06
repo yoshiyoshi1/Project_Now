@@ -35,8 +35,7 @@ void human::Update(void) {
 
 }
 
-void human::DrawHuman(CVector3 _pos) {
-
+void human::DrawHuman(void) {
 	for (int i = 0; i < MAX_HUMAN; i++) {
 		if (d[i] == 0) {
 			m_meshBoy.Draw(&m[i]);

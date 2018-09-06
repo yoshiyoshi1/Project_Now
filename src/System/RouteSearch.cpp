@@ -2,16 +2,24 @@
 #include "ThreadGuard.h"
 #include "Timer.h"
 
+#include "../Map/map.h"
 #include "RouteSearch.h"
 
 RouteSearch::RouteSearch()
 {
+	// 動的に２次元配列の領域を確保する
+	m_NodeData = Dynamic2DArray<Node, map::SIZE_Y, map::SIZE_X>();
+	m_RouteData = Dynamic2DArray<int, map::SIZE_Y, map::SIZE_X>();
+
 	// 仮データ
-	m_NextGoalPos.Set(68, 71);
+	//m_NextGoalPos.Set(68, 71);
+	m_NextGoalPos.Set(78, 78);
 	m_NextStartPos.Set(1, 1);
+	
+	m_NextSearchMode = SearchMode::ASTAR;
 
 	m_meshPin.LoadXFile("../data/Mesh/TestData/pin.x");
-	
+
 	m_UpdateTimer = new Timer();
 	m_MeasureTimer = new Timer();
 }
@@ -19,25 +27,23 @@ RouteSearch::RouteSearch()
 RouteSearch::~RouteSearch()
 {
 	ResetNodeData();
+
+	// 動的に確保した２次元配列を解放
+	Safe_Delete_2DArray<Node, map::SIZE_Y>(m_NodeData);
+	Safe_Delete_2DArray<int, map::SIZE_Y>(m_RouteData);
 }
 
 void RouteSearch::Update()
 {
-
+	
 	// 前回の更新から0.1秒経過していない場合、以降の処理を行わない
 	if (m_UpdateTimer->ElapsedTime(0.1f) == false)
 		return;
-
+	
 	// 目的地が変わっていない場合、
-	if (m_GoalPos == m_NextGoalPos) {
-		// 開始地点も変わっていない場合、以降の処理を行わない
-		if (m_StartPos == m_NextStartPos)
-			return;
-		
-		// 次の開始地点がCLOSEの場合、以降の処理を行わない
-		//if (CheckPos(m_NextStartPos))
-		//	return;
-	}
+	// 開始地点も変わっていない場合、以降の処理を行わない
+	if (m_GoalPos == m_NextGoalPos && m_StartPos == m_NextStartPos)
+		return;
 	
 	// m_NextGoalPos が道以外ならば、以降の処理を行わない
 	if (m_RouteData[m_NextGoalPos.y][m_NextGoalPos.x] != 0)
@@ -49,13 +55,21 @@ void RouteSearch::Update()
 	// 新たな目的地として設定
 	m_GoalPos = m_NextGoalPos;
 
+	// 探索アルゴリズムを設定
+	m_SearchMode = m_NextSearchMode;
+
 	// 計測開始
 	m_MeasureTimer->SetTime();
 
 	// 経路探索を別スレッドで行う
-	std::thread sThread(&RouteSearch::Search, this);	// 経路探索用スレッドの作成
-	m_SearchThread = std::move(sThread);				// メンバー関数にスレッドを受け渡す
-	//ThreadGuard threadGuard(searchThread);			// エラーで落ちた際に自動でJoinを行う
+	if (m_SearchMode == SearchMode::ASTAR) {
+		std::thread sThread(&RouteSearch::Search_AStar, this);	// 経路探索用スレッドの作成
+		m_SearchThread = std::move(sThread);					// メンバー関数にスレッドを受け渡す
+	}
+	else if (m_SearchMode == SearchMode::DIJKSTRA){
+		std::thread sThread(&RouteSearch::Search_Dijkstra, this);	// 経路探索用スレッドの作成
+		m_SearchThread = std::move(sThread);						// メンバー関数にスレッドを受け渡す
+	}
 }
 
 void RouteSearch::Draw()
@@ -67,22 +81,54 @@ void RouteSearch::Draw()
 	}
 
 	// 最後に探索したノードをセットする
-	Node* pNode;
-	pNode = m_LastSearchNode;
-	if (pNode == nullptr)
+	Node* pNode = nullptr;
+	if (m_SearchMode == SearchMode::ASTAR) {
+		pNode = m_LastSearchNode;
+		if (pNode == nullptr)
+			return;
+	}
+	else if (m_SearchMode == SearchMode::DIJKSTRA){
+		pNode = &m_NodeData[m_GoalPos.y][m_GoalPos.x];
+		if (pNode->status != Node::Status::CLOSE)
+			return;
+	}
+	else {
 		return;
+	}
+	
+	// テスト用、ノード情報に合わせた色のピンを表示
+	if (APP.m_isDebug) {
+		for (int cntY = 0; cntY != map::SIZE_Y; cntY++) {
+			for (int cntX = 0; cntX != map::SIZE_X; cntX++) {
+				if (m_NodeData[cntY][cntX].status == Node::Status::OPEN) {
+					// OPENなノードを緑色のピンで表示
+					CMatrix m;
+					m.CreateMove(m_NodeData[cntY][cntX].pos.x * 2.0f, -2.9f, m_NodeData[cntY][cntX].pos.y * 2.0f);
+					m.Scale_Local(0.7f, 0.7f, 0.7f);
+					m_meshPin.Draw(&m, ARGB_D3DX(255, 0, 200, 0));
+				}
+				else if (m_NodeData[cntY][cntX].status == Node::Status::CLOSE) {
+					// CLOSEなノードを黄色のピンで表示
+					CMatrix m;
+					m.CreateMove(m_NodeData[cntY][cntX].pos.x * 2.0f, -2.9f, m_NodeData[cntY][cntX].pos.y * 2.0f);
+					m.Scale_Local(0.7f, 0.7f, 0.7f);
+					m_meshPin.Draw(&m, ARGB_D3DX(255, 200, 200, 0));
+				}
+			}
+		}
+	}
 
 	// CLOSEなノードの数を取得
 	int closeSize = GetCount(Node::Status::CLOSE);
-
+	
 	for (int i = 0; ; i++) {
 
-		// 経路をピンのメッシュで表示
+		// 経路を赤色のピンで表示
 		CMatrix m;
-		int blue = (int)(i * (255.0f / closeSize));
-		int red = 255 - blue;
+		//int blue = (int)(i * (255.0f / closeSize));
+		//int red = 255 - blue;
 		m.CreateMove(pNode->pos.x * 2.0f, -3.0f, pNode->pos.y * 2.0f);
-		m_meshPin.Draw(&m, ARGB_D3DX(255, red, 0, blue));
+		m_meshPin.Draw(&m, ARGB_D3DX(255, 200, 0, 0));
 
 		// 親がいない場合、処理を終了する
 		if (pNode->parent == nullptr)
@@ -98,8 +144,8 @@ void RouteSearch::Draw()
 void RouteSearch::SetMapData(int* mapData)
 {
 	int i = 0;
-	for (int cntY = 0; cntY != SIZE_Y; cntY++) {
-		for (int cntX = 0; cntX != SIZE_X; cntX++, i++) {
+	for (int cntY = 0; cntY != map::SIZE_Y; cntY++) {
+		for (int cntX = 0; cntX != map::SIZE_X; cntX++, i++) {
 			m_RouteData[cntY][cntX] = mapData[i];
 		}
 	}
@@ -116,7 +162,7 @@ void RouteSearch::Reset(Position pos)
 
 	// スタート地点のノードをOPENにする
 	Node* pStartNode = &m_NodeData[m_StartPos.y][m_StartPos.x];
-	pStartNode->SetNode(0, nullptr);
+	pStartNode->SetNode(1, nullptr);
 	pStartNode->status = Node::Status::OPEN;
 }
 
@@ -181,8 +227,8 @@ bool RouteSearch::CheckPos(Position pos)
 //=======================================================
 void RouteSearch::ResetNodeData()
 {
-	for (int cntY = 0; cntY != SIZE_Y; cntY++) {
-		for (int cntX = 0; cntX != SIZE_X; cntX++) {
+	for (int cntY = 0; cntY != map::SIZE_Y; cntY++) {
+		for (int cntX = 0; cntX != map::SIZE_X; cntX++) {
 			m_NodeData[cntY][cntX].Reset();
 			m_NodeData[cntY][cntX].pos = Position(cntX, cntY);
 		}
@@ -197,8 +243,8 @@ int RouteSearch::GetCount(int status)
 {
 	int ret = 0;	// カウンタ
 
-	for (int cntY = 0; cntY < SIZE_Y; cntY++) {
-		for (int cntX = 0; cntX < SIZE_X; cntX++) {
+	for (int cntY = 0; cntY < map::SIZE_Y; cntY++) {
+		for (int cntX = 0; cntX < map::SIZE_X; cntX++) {
 			// 指定された状態であればカウンタに加算する
 			if (m_NodeData[cntY][cntX].status == status)
 				ret++;
@@ -261,10 +307,10 @@ int RouteSearch::BackTrace(Position pos)
 }
 
 //=======================================================
-// A*で経路探索する
+// A*(A-Star)で経路探索する
 //	@return	: 目的地まで探索できたかどうか
 //=======================================================
-bool RouteSearch::Search()
+bool RouteSearch::Search_AStar()
 {
 
 	while (true) {
@@ -272,10 +318,6 @@ bool RouteSearch::Search()
 		//-----------------------------------------------
 		// 速度を維持するための処理
 		//-----------------------------------------------
-		// 探索済みのノードが一定数以上の場合、探索を終了する
-		if (GetCount(Node::Status::CLOSE) >= 25) 
-			return false;
-
 		// 60FPS を下回る場合、探索を終了する
 		if (m_MeasureTimer->ElapsedTime() >= 1000 / 60)
 			return false;
@@ -286,8 +328,8 @@ bool RouteSearch::Search()
 		Node* pNode = nullptr;	// 最小のコストを持つノードのポインタ
 		{
 			float costMin = 9999;
-			for (int cntY = 0; cntY < SIZE_Y; cntY++) {
-				for (int cntX = 0; cntX < SIZE_X; cntX++) {
+			for (int cntY = 0; cntY < map::SIZE_Y; cntY++) {
+				for (int cntX = 0; cntX < map::SIZE_X; cntX++) {
 					Node* pTmpNode = &m_NodeData[cntY][cntX];	// 現在調べているノード
 					
 					// OPENなノード以外の場合、処理スキップ
@@ -296,7 +338,6 @@ bool RouteSearch::Search()
 					
 					float tmpDis = GetDistance(pTmpNode->pos);	// ゴールまでの距離
 
-					/*
 					// 現在最小のコストと同じ場合、探索してきた方向と同じ方向のものを優先する
 					if(costMin == tmpDis){
 						if (pTmpNode->parent == nullptr)
@@ -320,12 +361,14 @@ bool RouteSearch::Search()
 						costMin = tmpDis;
 						pNode = &m_NodeData[cntY][cntX];
 					}
-					*/
 
+					/*
+					// よりコストが小さい場合、更新する
 					if (costMin > tmpDis) {
 						costMin = tmpDis;
 						pNode = &m_NodeData[cntY][cntX];
 					}
+					*/
 
 				}
 			}
@@ -366,8 +409,8 @@ bool RouteSearch::Search()
 			// 範囲外の場合は処理を行わない
 			if (tmpPos.x < 0) continue;
 			if (tmpPos.y < 0) continue;
-			if (tmpPos.x >= SIZE_X) continue;
-			if (tmpPos.y >= SIZE_Y) continue;
+			if (tmpPos.x >= map::SIZE_X) continue;
+			if (tmpPos.y >= map::SIZE_Y) continue;
 
 			// 道以外の場合は処理を行わない
 			if (m_RouteData[tmpPos.y][tmpPos.x] != 0) continue;
@@ -401,3 +444,94 @@ bool RouteSearch::Search()
 	}
 }
 
+
+//=======================================================
+// ダイクストラ法で経路探索する
+//	@return	: 目的地まで探索できたかどうか
+//=======================================================
+bool RouteSearch::Search_Dijkstra()
+{
+	
+	while (true) {
+
+		//-----------------------------------------------
+		// 速度を維持するための処理
+		//-----------------------------------------------
+		// 60FPS を下回る場合、探索を終了する
+		//if (m_MeasureTimer->ElapsedTime() >= 1000 / 60)
+		//	return false;
+
+		Node* pNode = nullptr;
+
+		//-----------------------------------------------
+		// 全てのノードを探索
+		//-----------------------------------------------
+		for (int cntY = 0; cntY < map::SIZE_Y; cntY++) {
+			for (int cntX = 0; cntX < map::SIZE_X; cntX++) {
+				Node* pTmpNode = &m_NodeData[cntY][cntX];
+
+				// 訪問済み or まだコストが未設定
+				if (pTmpNode->status == Node::Status::CLOSE)
+					continue;
+				if (pTmpNode->score <= 0)// check
+					continue;
+
+				// 初回時
+				if (pNode == nullptr) {
+					pNode = pTmpNode;
+					continue;
+				}
+
+				// 一番小さいコストのノードを探す
+				if (pTmpNode->score < pNode->score)
+					pNode = pTmpNode;
+
+			}
+		}
+
+		//-----------------------------------------------
+		// 全て探索し終わったら終了
+		//-----------------------------------------------
+		if (pNode == nullptr)
+			return true;
+
+		pNode->status = Node::Status::CLOSE;	// 探索済みにする
+		m_LastSearchNode = pNode;				// 最後に探索したノードを更新
+
+		//-----------------------------------------------
+		// 上下左右の４方向を確認
+		//-----------------------------------------------
+		Node* pSubNode = nullptr;
+		Position way[] = {
+			{  0, -1 },		// 下
+			{  1,  0 },		// 左
+			{  0,  1 },		// 上
+			{ -1,  0 },		// 右
+		};
+
+		for (int i = 0; i < 4; i++) {
+			Position tmpPos;
+			tmpPos = pNode->pos + way[i];
+
+			// 範囲外の場合は処理を行わない
+			if (tmpPos.x < 0) continue;
+			if (tmpPos.y < 0) continue;
+			if (tmpPos.x >= map::SIZE_X) continue;
+			if (tmpPos.y >= map::SIZE_Y) continue;
+
+			// 道以外の場合は処理を行わない
+			if (m_RouteData[tmpPos.y][tmpPos.x] != 0) continue;
+
+			pSubNode = &m_NodeData[tmpPos.y][tmpPos.x];
+			float score = pNode->score + 1;
+
+			// コストが未設定 or コストの少ない経路がある場合はアップデート
+			if ((pSubNode->score <= 0) || (pSubNode->score > score) ){
+				pSubNode->score = score;
+				pSubNode->parent = pNode;
+			}
+		}
+
+	}
+
+}

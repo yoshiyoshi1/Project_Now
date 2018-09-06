@@ -20,8 +20,10 @@ public:
 	HWND		m_hWnd;				
 	int			m_WndW,m_WndH;		
 	bool		m_CloseFlag;		
-	bool		m_bEndFlag;		// 終了フラグ	
-	DWORD		m_FrameCnt;			
+	bool		m_bEndFlag;			// 終了フラグ	
+	DWORD		m_FrameCnt;	
+
+	bool		m_isDebug = false;	// デバッグ中かどうか
 
 	// ウィンドウ初期化
 	bool InitWindow(HINSTANCE hInstance,int w,int h);	

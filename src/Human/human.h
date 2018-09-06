@@ -7,7 +7,7 @@ public:
 	void SetMapData(int* mapData);		// マップ情報をセットする関数
 	void LoadHuman(void);						// humanの読み込み
 	void Update(void);					// humanの更新
-	void DrawHuman(CVector3 _pos);		// humanの描画
+	void DrawHuman(void);		// humanの描画
 
 private:
 	static const int SIZE_X = 80;
